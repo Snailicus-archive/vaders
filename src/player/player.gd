@@ -6,6 +6,8 @@ signal died
 
 export(int) var hp = 10
 
+# wew
+
 export(float) var max_speed = 900
 export(float) var acceleration = 4000
 export(float) var turn_speed = 10
