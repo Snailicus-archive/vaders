@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/environment/game_area.gd" type="Script" id=1]
+[ext_resource path="res://src/environment/bouncy_wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/enemies/enemy.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 623.624, 378.757 )
+
+[node name="World" type="Node"]
+
+[node name="GameArea" type="Area2D" parent="."]
+position = Vector2( 512.072, 301.071 )
+collision_mask = 12
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="BouncyWall" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1020.76, 311.488 )
+scale = Vector2( 1, 20 )
+
+[node name="BouncyWall2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -2.77514, 397.504 )
+scale = Vector2( 1, 20 )
+
+[node name="BouncyWall3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 512.188, 4.58151 )
+scale = Vector2( 20, 1 )
+
+[node name="BouncyWall4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 479.066, 597.642 )
+scale = Vector2( 20, 1 )
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 129.744, 190.863 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 157.058, 294.131 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 177.81, 287.188 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 136.301, 256.056 )
+
+[node name="Enemy5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 241.173, 254.591 )
+
+[node name="Enemy6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 173.659, 225.779 )
+
+[node name="Enemy7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 209.553, 254.469 )
+
+[node name="Enemy8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 151.806, 227.733 )
+
+[node name="Enemy9" parent="." instance=ExtResource( 3 )]
+position = Vector2( 207.721, 231.273 )
+
+[node name="Enemy10" parent="." instance=ExtResource( 3 )]
+position = Vector2( 185.502, 260.329 )
+
+[node name="Enemy11" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224.814, 234.325 )
+
+[node name="Enemy12" parent="." instance=ExtResource( 3 )]
+position = Vector2( 134.348, 223.704 )
+
+[node name="Enemy13" parent="." instance=ExtResource( 3 )]
+position = Vector2( 234.825, 273.149 )
+
+[node name="Enemy14" parent="." instance=ExtResource( 3 )]
+position = Vector2( 199.664, 274.614 )
+
+[node name="Enemy15" parent="." instance=ExtResource( 3 )]
+position = Vector2( 195.635, 216.745 )
+
+[node name="Enemy16" parent="." instance=ExtResource( 3 )]
+position = Vector2( 169.264, 254.469 )
+[connection signal="body_exited" from="GameArea" to="GameArea" method="_on_GameArea_body_exited"]

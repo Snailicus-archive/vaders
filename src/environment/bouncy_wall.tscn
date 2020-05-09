@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 34.1482, 34.4362 )
+
+[node name="BouncyWall" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.317647, 0.0196078, 0.0196078, 1 )
+polygon = PoolVector2Array( -30, -30, 30, -30, 30, 30, -30, 30 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
