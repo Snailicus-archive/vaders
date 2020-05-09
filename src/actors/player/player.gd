@@ -62,6 +62,3 @@ func _physics_process(delta):
 	if collision:
 		if collision.collider:
 			velocity = velocity.slide(collision.normal)
-
-
-

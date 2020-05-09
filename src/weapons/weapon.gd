@@ -37,7 +37,7 @@ func _on_Cooldown_timeout():
 
 func fire():
 	if flags.melee:
-		damage_mod = 2
+		damage_mod = 1
 		melee_attack()
 	elif flags.bullet:
 		damage_mod = 1
@@ -53,12 +53,11 @@ func fire():
 		
 func shoot_projectile():
 	var parent_velocity = parent.velocity if parent else Vector2.ZERO
-	emit_signal("shot", projectile, $Muzzle.global_position, 
+	emit_signal("shot", projectile, $Muzzle.global_position,
 		global_rotation, parent_velocity)
 
-func melee_attack():
-	for body in $Hitbox.get_overlapping_bodies():
-		print(body)
-		if body.has_method("take_damage"):
-			body.take_damage(damage)
 
+func melee_attack():
+	for hurtbox in $Hitbox.get_overlapping_areas():
+		if hurtbox.has_method("take_damage"):
+			hurtbox.take_damage(damage)
