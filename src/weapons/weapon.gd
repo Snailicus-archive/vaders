@@ -1,22 +1,24 @@
-extends Area2D
+extends Node2D
 
 signal shot
 
-export(float) var cooldown = 0.5
+export(float) var cooldown := 0.5
+export(int) var damage := 1
 export(PackedScene) var projectile
 
+var parent : Node
+var queue_shot := false
+var enemies_in_range := []
+
 var cooldown_mod := 1.0
+var damage_mod := 1
 
-var melee_damage := 1
 
-onready var queue_shot := false
-
-var parent
-
-# flags
-var empower := false
-var melee_on := false
-
+var flags := {
+	'empower': false,
+	'melee': true,
+	'bullet': false,
+}
 
 func _ready():
 	$Cooldown.wait_time = cooldown * cooldown_mod
@@ -29,13 +31,23 @@ func trigger():
 func release():
 	queue_shot = false
 
+func _on_Cooldown_timeout():
+	if queue_shot:
+		fire()
+
 func fire():
-	if melee_on:
-		cooldown_mod *= 1
+	if flags.melee:
+		damage_mod = 2
 		melee_attack()
-	else:
+	elif flags.bullet:
+		damage_mod = 1
 		shoot_projectile()
-		
+	else:
+		print('Either melee or bullet must be active.')
+	if flags.empower:
+		damage_mod *= 2
+		cooldown_mod *= 2
+
 	$Cooldown.wait_time = cooldown * cooldown_mod
 	$Cooldown.start()
 		
@@ -43,15 +55,10 @@ func shoot_projectile():
 	var parent_velocity = parent.velocity if parent else Vector2.ZERO
 	emit_signal("shot", projectile, $Muzzle.global_position, 
 		global_rotation, parent_velocity)
-	
-func _on_Cooldown_timeout():
-	if queue_shot:
-		fire()
 
-# 
 func melee_attack():
-	for body in self.get_overlapping_bodies():
+	for body in $Hitbox.get_overlapping_bodies():
+		print(body)
 		if body.has_method("take_damage"):
-			body.take_damage(melee_damage)
-	
-	
+			body.take_damage(damage)
+

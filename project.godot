@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Game"
+config/name="Meta Invaders"
 run/main_scene="res://src/main.tscn"
 config/icon="res://assets/icon.png"
 
@@ -77,12 +77,13 @@ melee={
 
 [layer_names]
 
-2d_physics/layer_1="environment"
+2d_physics/layer_1="Environment"
 3d_render/layer_1="wew"
 3d_physics/layer_1="wew"
-2d_physics/layer_2="projectiles"
-2d_physics/layer_3="player"
-2d_physics/layer_4="enemies"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Player Hurtbox"
+2d_physics/layer_5="Enemy Hurtbox"
 
 [rendering]
 

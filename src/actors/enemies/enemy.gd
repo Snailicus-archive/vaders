@@ -1,18 +1,14 @@
-extends KinematicBody2D
-
-
-onready var velocity: Vector2
-
-export(int) var hp = 3
+extends "res://src/actors/actor.gd"
 
 export(float) var turn_speed = 10
 export(float) var max_speed = 400
 export(float) var acceleration = 300
 
+onready var velocity: Vector2
+
 var target
 var repulsion_force
 var repelled = {}
-
 
 func _physics_process(delta):
 	var my_dir = Vector2.RIGHT.rotated(rotation)
@@ -32,15 +28,6 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		velocity = velocity.slide(collision.normal)
-
-
-func take_damage(damage):
-	hp -= damage
-	if hp <= 0:
-		kill()
-
-func kill():
-	queue_free()
 
 func _on_Detection_body_entered(body):
 	target = body
