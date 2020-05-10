@@ -1,7 +1,5 @@
 extends "res://src/actors/actor.gd"
 
-signal died
-
 # TODO: weapon animation with sparkles.
 
 export(float) var max_speed := 900
@@ -11,17 +9,9 @@ export(float) var turn_speed := 10
 onready var velocity := Vector2()
 onready var weapon := $Pivot/Offset/Weapon
 
-
 func _ready():
 	weapon.parent = self
 
-func take_damage(x):
-	print('ouch')
-	.take_damage(x)
-func kill():
-	emit_signal("died")
-	.kill()
-	
 func _input(event):
 	if event.is_action_pressed("fire"):
 		weapon.trigger()
@@ -31,19 +21,6 @@ func _input(event):
 	if event.is_action_pressed("melee"):
 		weapon.flags.melee = not weapon.flags.melee
 		weapon.flags.bullet = not weapon.flags.bullet
-
-
-func get_direction():
-	var direction = Vector2()
-	if Input.is_action_pressed('right'):
-		direction.x += 1
-	if Input.is_action_pressed('left'):
-		direction.x -= 1
-	if Input.is_action_pressed('down'):
-		direction.y += 1
-	if Input.is_action_pressed('up'):
-		direction.y -= 1
-	return direction.normalized()
 
 func _physics_process(delta):
 	# turning
@@ -62,3 +39,19 @@ func _physics_process(delta):
 	if collision:
 		if collision.collider:
 			velocity = velocity.slide(collision.normal)
+
+func get_direction():
+	var direction = Vector2()
+	if Input.is_action_pressed('right'):
+		direction.x += 1
+	if Input.is_action_pressed('left'):
+		direction.x -= 1
+	if Input.is_action_pressed('down'):
+		direction.y += 1
+	if Input.is_action_pressed('up'):
+		direction.y -= 1
+	return direction.normalized()
+
+func _on_taken_damage(x):
+	print('ouch')
+	._on_taken_damage(x)

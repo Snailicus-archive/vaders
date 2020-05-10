@@ -1,4 +1,6 @@
 extends Area2D
 
+signal took_damage(damage)
+
 func take_damage(damage: int):
-	get_parent().take_damage(damage)
+	emit_signal('took_damage', damage)
