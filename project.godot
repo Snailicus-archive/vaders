@@ -28,12 +28,6 @@ config/icon="res://assets/icon.png"
 
 Movement="*res://src/autoloads/movement.gd"
 
-[display]
-
-window/size/resizable=false
-window/size/test_width=1024
-window/size/test_height=600
-
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
