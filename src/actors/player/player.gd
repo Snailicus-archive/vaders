@@ -1,44 +1,79 @@
 extends "res://src/actors/actor.gd"
 
-# TODO: weapon animation with sparkles.
+# BUG: fix laser going through walls
 
-export(float) var max_speed := 900
-export(float) var acceleration := 4000
-export(float) var turn_speed := 10
+# TODO: implement new weapon scheme
+# REFACTOR: animations with animation tree
 
+
+export(float) var MAX_SPEED := 900
+export(float) var ACCELERATION := 4000
+export(float) var TURN_SPEED := 10
+export(float) var DASH_SPEED := 2200
+
+var locked := false setget set_locked
+
+var max_speed := MAX_SPEED
+var acceleration := ACCELERATION
+
+onready var dash_velocity := Vector2.ZERO
 onready var velocity := Vector2()
 onready var weapon := $Pivot/Offset/Weapon
 
 func _ready():
 	weapon.parent = self
+	weapon.change_weapon("bullet")
 
 func _input(event):
-	if event.is_action_pressed("fire"):
+	if event.is_action_pressed("slot3"):
+		weapon.change_weapon("laser")
+	
+#	if event.is_action_pressed("ui_accept"):
+#		dash(velocity.normalized())
+	
+	if event.is_action_pressed("attack"):
 		weapon.trigger()
-	elif event.is_action_released("fire"):
+	elif event.is_action_released("attack"):
 		weapon.release()
 	
-	if event.is_action_pressed("melee"):
-		weapon.flags.melee = not weapon.flags.melee
-		weapon.flags.bullet = not weapon.flags.bullet
+	if event.is_action_pressed("slot2"):
+		weapon.change_weapon("melee")
+
+	if event.is_action_pressed("slot1"):
+		weapon.change_weapon("bullet")
 
 func _physics_process(delta):
 	# turning
 	var mouse_pos = get_global_mouse_position()
 	var turn_target = $Pivot.get_angle_to(mouse_pos)
-	if abs(turn_target) < turn_speed * delta:
-		$Pivot.rotation += turn_target
-	else:
-		$Pivot.rotation += sign(turn_target) * turn_speed * delta
+	if not locked:
+		if abs(turn_target) < TURN_SPEED * delta:
+			$Pivot.rotation += turn_target
+		else:
+			$Pivot.rotation += sign(turn_target) * TURN_SPEED * delta
 
 	# movement
 	var velocity_target = get_direction() * max_speed
-	velocity = Movement.approach(velocity, velocity_target, acceleration*delta)
+	if dash_velocity:
+		velocity_target = dash_velocity
+
+	velocity = Movement.approach(velocity, 
+		velocity_target, acceleration*delta)
+
+	if velocity:
+		$Sprite.rotation = velocity.angle() + PI/2
 
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		if collision.collider:
 			velocity = velocity.slide(collision.normal)
+
+func dash(direction):
+	max_speed = DASH_SPEED
+	acceleration = max_speed * 8
+	yield(get_tree().create_timer(0.05), "timeout")
+	max_speed = MAX_SPEED
+	acceleration = ACCELERATION
 
 func get_direction():
 	var direction = Vector2()
@@ -55,3 +90,8 @@ func get_direction():
 func _on_taken_damage(x):
 	print('ouch')
 	._on_taken_damage(x)
+
+func set_locked(_locked):
+	print(_locked)
+	weapon.locked = _locked
+	locked = _locked

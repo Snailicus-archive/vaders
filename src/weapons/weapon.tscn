@@ -1,21 +1,294 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://src/weapons/bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/weapons/weapon.gd" type="Script" id=2]
-[ext_resource path="res://assets/icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/shipsheetparts2-highercontrast.PNG" type="Texture" id=3]
+[ext_resource path="res://assets/Dragon_Breath.png" type="Texture" id=4]
+[ext_resource path="res://assets/laser.png" type="Texture" id=5]
+[ext_resource path="res://assets/Beam.png" type="Texture" id=6]
+[ext_resource path="res://assets/Begin.png" type="Texture" id=7]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 106, 213, 11, 25 )
+
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 56.2968
-height = 15.7809
+height = 6.82434
+
+[sub_resource type="SegmentShape2D" id=3]
+b = Vector2( 2000, 0 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 217, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 434, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 651, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 217, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 434, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 651, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 448, 217, 224 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 4 ) ],
+"loop": false,
+"name": "default",
+"speed": 25.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=14]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=15]
+
+[sub_resource type="Gradient" id=16]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 153.84
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+initial_velocity_random = 0.2
+orbit_velocity = 1.0
+orbit_velocity_random = 1.0
+color_ramp = SubResource( 17 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 1024, 0, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 1536, 0, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 682, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 682, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 1024, 682, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 1536, 682, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 1364, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 1364, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 5 )
+region = Rect2( 1024, 1364, 512, 682 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 5 )
+region = Rect2( 1536, 1364, 512, 682 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "default",
+"speed": 30.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=32]
+
+[sub_resource type="Animation" id=33]
+resource_name = "BulletAttack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("animations/Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=34]
+tracks/0/type = "value"
+tracks/0/path = NodePath("animations/Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("animations/Bullet:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "LaerAttack"
+
+[sub_resource type="Animation" id=36]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("animations/Laser2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("animations/AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+
+[sub_resource type="Animation" id=37]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("animations/Melee2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("animations/AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.4 ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("animations/Melee2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("animations/AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.22 ]
+}
+
+[sub_resource type="AnimationNodeStateMachine" id=39]
+
+[sub_resource type="AnimationNodeStateMachine" id=40]
+states/StateMachine/node = SubResource( 39 )
+states/StateMachine/position = Vector2( 115, 96 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=42]
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 2 )
 cooldown = 0.1
 projectile = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.7, 0.2 )
-texture = ExtResource( 3 )
+[node name="Bullet" type="Sprite" parent="."]
+visible = false
+rotation = 1.5708
+texture = SubResource( 1 )
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.1
@@ -25,9 +298,100 @@ one_shot = true
 position = Vector2( 20, 0 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource( 1 )
+position = Vector2( 8, 0 )
+shape = SubResource( 2 )
+
+[node name="LaserHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserHitBox"]
+shape = SubResource( 3 )
+
+[node name="Melee" type="AnimatedSprite" parent="."]
+visible = false
+rotation = 1.5708
+scale = Vector2( 0.7, 0.3 )
+frames = SubResource( 13 )
+frame = 9
+playing = true
+
+[node name="LaserNew" type="Node2D" parent="."]
+visible = false
+
+[node name="LaserRayCast" type="RayCast2D" parent="LaserNew"]
+enabled = true
+cast_to = Vector2( 2000, 0 )
+
+[node name="end" type="Sprite" parent="LaserNew"]
+material = SubResource( 14 )
+texture = ExtResource( 6 )
+centered = false
+offset = Vector2( 0, -12 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2000, 24 )
+
+[node name="start" type="Sprite" parent="LaserNew"]
+material = SubResource( 15 )
+texture = ExtResource( 7 )
+
+[node name="Particles2D" type="Particles2D" parent="LaserNew"]
+scale = Vector2( 0.4, 0.4 )
+emitting = false
+amount = 80
+lifetime = 0.2
+one_shot = true
+speed_scale = 2.0
+process_material = SubResource( 18 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="LaserOld" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, 40 )
+rotation = -1.5708
+scale = Vector2( 0.15, 2 )
+frames = SubResource( 31 )
+frame = 3
+centered = false
+
+[node name="animations" type="Node2D" parent="."]
+visible = false
+
+[node name="Melee2" type="Sprite" parent="animations"]
+visible = false
+texture = ExtResource( 4 )
+vframes = 3
+hframes = 4
+frame = 8
+
+[node name="Laser2" type="Sprite" parent="animations"]
+visible = false
+material = SubResource( 32 )
+texture = ExtResource( 5 )
+vframes = 3
+hframes = 4
+frame = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="animations"]
+playback_speed = 1.4
+anims/BulletAttack = SubResource( 33 )
+anims/BulletOn = SubResource( 34 )
+anims/LaerAttack = SubResource( 35 )
+anims/LaserOn = SubResource( 36 )
+anims/MeleeAttack = SubResource( 37 )
+anims/MeleeOn = SubResource( 38 )
+
+[node name="AnimationTree" type="AnimationTree" parent="animations"]
+tree_root = SubResource( 40 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 41 )
+parameters/StateMachine/playback = SubResource( 42 )
 [connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
