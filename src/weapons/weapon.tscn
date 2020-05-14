@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://src/weapons/bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/weapons/weapon.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/laser.png" type="Texture" id=5]
 [ext_resource path="res://assets/Beam.png" type="Texture" id=6]
 [ext_resource path="res://assets/Begin.png" type="Texture" id=7]
+[ext_resource path="res://src/weapons/laser.gd" type="Script" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -16,65 +17,62 @@ region = Rect2( 106, 213, 11, 25 )
 radius = 56.2968
 height = 6.82434
 
-[sub_resource type="SegmentShape2D" id=3]
-b = Vector2( 2000, 0 )
-
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
 region = Rect2( 217, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
 region = Rect2( 434, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
 region = Rect2( 651, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
 region = Rect2( 217, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
 region = Rect2( 434, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
 region = Rect2( 651, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 448, 217, 224 )
 
-[sub_resource type="SpriteFrames" id=13]
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 4 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 3 ) ],
 "loop": false,
 "name": "default",
 "speed": 25.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=14]
+[sub_resource type="CanvasItemMaterial" id=13]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=15]
+[sub_resource type="CanvasItemMaterial" id=14]
 
-[sub_resource type="Gradient" id=16]
+[sub_resource type="Gradient" id=15]
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=17]
-gradient = SubResource( 16 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=17]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 153.84
@@ -83,67 +81,14 @@ initial_velocity = 500.0
 initial_velocity_random = 0.2
 orbit_velocity = 1.0
 orbit_velocity_random = 1.0
-color_ramp = SubResource( 17 )
+color_ramp = SubResource( 16 )
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 512, 682 )
+[sub_resource type="SegmentShape2D" id=18]
+b = Vector2( 2000, 0 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 5 )
-region = Rect2( 512, 0, 512, 682 )
+[sub_resource type="CanvasItemMaterial" id=19]
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 5 )
-region = Rect2( 1024, 0, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 5 )
-region = Rect2( 1536, 0, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 682, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 5 )
-region = Rect2( 512, 682, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 5 )
-region = Rect2( 1024, 682, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 5 )
-region = Rect2( 1536, 682, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 1364, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 5 )
-region = Rect2( 512, 1364, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 5 )
-region = Rect2( 1024, 1364, 512, 682 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 5 )
-region = Rect2( 1536, 1364, 512, 682 )
-
-[sub_resource type="SpriteFrames" id=31]
-animations = [ {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
-"loop": true,
-"name": "default",
-"speed": 30.0
-} ]
-
-[sub_resource type="CanvasItemMaterial" id=32]
-
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=20]
 resource_name = "BulletAttack"
 tracks/0/type = "value"
 tracks/0/path = NodePath("animations/Bullet:frame")
@@ -158,7 +103,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=21]
 tracks/0/type = "value"
 tracks/0/path = NodePath("animations/Bullet:frame")
 tracks/0/interp = 1
@@ -184,10 +129,10 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=22]
 resource_name = "LaerAttack"
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=23]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("animations/Laser2:frame")
@@ -214,7 +159,7 @@ tracks/1/keys = {
 "values": [ 2.0 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=24]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -242,7 +187,7 @@ tracks/1/keys = {
 "values": [ 1.4 ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=25]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -270,15 +215,15 @@ tracks/1/keys = {
 "values": [ 0.22 ]
 }
 
-[sub_resource type="AnimationNodeStateMachine" id=39]
+[sub_resource type="AnimationNodeStateMachine" id=26]
 
-[sub_resource type="AnimationNodeStateMachine" id=40]
-states/StateMachine/node = SubResource( 39 )
+[sub_resource type="AnimationNodeStateMachine" id=27]
+states/StateMachine/node = SubResource( 26 )
 states/StateMachine/position = Vector2( 115, 96 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=42]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 2 )
@@ -306,61 +251,55 @@ collision_mask = 16
 position = Vector2( 8, 0 )
 shape = SubResource( 2 )
 
-[node name="LaserHitBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserHitBox"]
-shape = SubResource( 3 )
-
 [node name="Melee" type="AnimatedSprite" parent="."]
 visible = false
 rotation = 1.5708
 scale = Vector2( 0.7, 0.3 )
-frames = SubResource( 13 )
+frames = SubResource( 12 )
 frame = 9
 playing = true
 
-[node name="LaserNew" type="Node2D" parent="."]
+[node name="Laser" type="Node2D" parent="."]
 visible = false
+script = ExtResource( 8 )
 
-[node name="LaserRayCast" type="RayCast2D" parent="LaserNew"]
-enabled = true
-cast_to = Vector2( 2000, 0 )
-
-[node name="end" type="Sprite" parent="LaserNew"]
-material = SubResource( 14 )
+[node name="Body" type="Sprite" parent="Laser"]
+material = SubResource( 13 )
 texture = ExtResource( 6 )
 centered = false
 offset = Vector2( 0, -12 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 2000, 24 )
 
-[node name="start" type="Sprite" parent="LaserNew"]
-material = SubResource( 15 )
+[node name="Start" type="Sprite" parent="Laser"]
+material = SubResource( 14 )
 texture = ExtResource( 7 )
 
-[node name="Particles2D" type="Particles2D" parent="LaserNew"]
+[node name="End" type="Position2D" parent="Laser"]
+
+[node name="Particles2D" type="Particles2D" parent="Laser"]
 scale = Vector2( 0.4, 0.4 )
 emitting = false
 amount = 80
 lifetime = 0.2
 one_shot = true
 speed_scale = 2.0
-process_material = SubResource( 18 )
+process_material = SubResource( 17 )
 texture = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="LaserOld" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 0, 40 )
-rotation = -1.5708
-scale = Vector2( 0.15, 2 )
-frames = SubResource( 31 )
-frame = 3
-centered = false
+[node name="RayCast2D" type="RayCast2D" parent="Laser"]
+enabled = true
+cast_to = Vector2( 2000, 0 )
+
+[node name="LaserHitBox" type="Area2D" parent="Laser"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/LaserHitBox"]
+shape = SubResource( 18 )
 
 [node name="animations" type="Node2D" parent="."]
 visible = false
@@ -374,7 +313,7 @@ frame = 8
 
 [node name="Laser2" type="Sprite" parent="animations"]
 visible = false
-material = SubResource( 32 )
+material = SubResource( 19 )
 texture = ExtResource( 5 )
 vframes = 3
 hframes = 4
@@ -382,16 +321,16 @@ frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="animations"]
 playback_speed = 1.4
-anims/BulletAttack = SubResource( 33 )
-anims/BulletOn = SubResource( 34 )
-anims/LaerAttack = SubResource( 35 )
-anims/LaserOn = SubResource( 36 )
-anims/MeleeAttack = SubResource( 37 )
-anims/MeleeOn = SubResource( 38 )
+anims/BulletAttack = SubResource( 20 )
+anims/BulletOn = SubResource( 21 )
+anims/LaerAttack = SubResource( 22 )
+anims/LaserOn = SubResource( 23 )
+anims/MeleeAttack = SubResource( 24 )
+anims/MeleeOn = SubResource( 25 )
 
 [node name="AnimationTree" type="AnimationTree" parent="animations"]
-tree_root = SubResource( 40 )
+tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 41 )
-parameters/StateMachine/playback = SubResource( 42 )
+parameters/playback = SubResource( 28 )
+parameters/StateMachine/playback = SubResource( 29 )
 [connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]

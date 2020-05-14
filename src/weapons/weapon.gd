@@ -23,7 +23,8 @@ var flags := {
 
 onready var bulletS := $Bullet
 onready var meleeS := $Melee
-onready var laserS := $LaserNew
+onready var laserS := $Laser
+
 
 func set_locked(_locked):
 	if not _locked and queue_shot:
@@ -98,18 +99,13 @@ func melee_attack():
 		hurtbox.take_damage(damage * damage_mod)
 
 func laser_attack():
-	var distance = 2000
-	if $LaserNew/LaserRayCast.is_colliding():
-		distance = $Muzzle.global_position.distance_to($LaserNew/LaserRayCast.get_collision_point())
-	
-	$LaserNew/end.region_rect.end.x = distance
-	$LaserHitBox/CollisionShape2D.shape.b.x = distance
-	for hurtbox in $LaserHitBox.get_overlapping_areas():
+	$Laser.attacking = true
+	for hurtbox in $Laser/LaserHitBox.get_overlapping_areas():
 		hurtbox.take_damage(damage * damage_mod)
-		$LaserNew/Particles2D.global_position = hurtbox.global_position
-		$LaserNew/Particles2D.restart()
-	yield(get_tree().create_timer(0.3), "timeout")
-	$LaserNew/end.region_rect.end.x = 0
+		$Laser/Particles2D.global_position = hurtbox.global_position
+		$Laser/Particles2D.restart()
+	yield(get_tree().create_timer(0.3), "timeout")	
+	$Laser.attacking = false
 
 func update():
 	if $Cooldown.is_stopped():
@@ -123,7 +119,6 @@ func update():
 			laserS.hide()
 		elif flags.laser:
 			laserS.show()
-			$LaserNew/end.region_rect.end.x = 0
 			bulletS.hide()
 			meleeS.hide()
 			
