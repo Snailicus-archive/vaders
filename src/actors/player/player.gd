@@ -17,10 +17,11 @@ var locked := false setget set_locked
 
 var max_speed := MAX_SPEED
 var acceleration := ACCELERATION
+var velocity := Vector2.ZERO
 
 onready var dash_velocity := Vector2.ZERO
-onready var velocity := Vector2()
 onready var weapon := $Pivot/Offset/Weapon
+onready var camera := $CameraPivot/Offset/Camera
 
 func _ready():
 	weapon.parent = self

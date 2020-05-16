@@ -1,7 +1,10 @@
 extends Node
 
+onready var player := $Player
+onready var world := $World
+
 func _ready():
-	$Player.weapon.connect("shot", self, "on_Player_shoot")
+	player.weapon.connect("shot", self, "on_Player_shoot")
 
 func on_Player_shoot(projectile:PackedScene, position:Vector2, rotation:float, parent_velocity):
 	var p = projectile.instance()

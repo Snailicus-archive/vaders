@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/shipsheetparts2-highercontrast.PNG" type="Texture" id=1]
 [ext_resource path="res://src/weapons/weapon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actors/player/player.gd" type="Script" id=3]
 [ext_resource path="res://src/actors/actor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/player/camera_pivot.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -39,3 +40,22 @@ position = Vector2( 45, 0 )
 
 [node name="Weapon" parent="Pivot/Offset" index="0" instance=ExtResource( 2 )]
 position = Vector2( -0.188934, 0 )
+
+[node name="CameraPivot" type="Position2D" parent="." index="4"]
+script = ExtResource( 5 )
+
+[node name="Offset" type="Position2D" parent="CameraPivot" index="0"]
+position = Vector2( 300, 0 )
+
+[node name="Camera" type="Camera2D" parent="CameraPivot/Offset" index="0"]
+position = Vector2( -32, 0 )
+current = true
+zoom = Vector2( 2, 2 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.3
+drag_margin_top = 0.6
+drag_margin_right = 0.3
+drag_margin_bottom = 0.6
+editor_draw_drag_margin = true

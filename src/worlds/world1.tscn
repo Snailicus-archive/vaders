@@ -1,16 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/environment/game_area.gd" type="Script" id=1]
 [ext_resource path="res://src/environment/bouncy_wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actors/enemies/enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/worlds/world.gd" type="Script" id=4]
+[ext_resource path="res://assets/wallpapers.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2137.93, 1237.07 )
 
 [node name="World" type="Node"]
+script = ExtResource( 4 )
+
+[node name="Wallpaper" type="Sprite" parent="."]
+position = Vector2( -1737.86, -881.762 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 3000 )
 
 [node name="GameArea" type="Area2D" parent="."]
 position = Vector2( 1266.07, 685.071 )
+collision_layer = 65
 collision_mask = 12
 script = ExtResource( 1 )
 __meta__ = {
@@ -21,20 +32,34 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="BouncyWall" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2099.07, 311.488 )
-scale = Vector2( 1, 20 )
+position = Vector2( 3370.75, 528.912 )
+scale = Vector2( 1, 47 )
+
+[node name="BouncyWall5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1974.95, 700.749 )
+scale = Vector2( 1, 13.6 )
+
+[node name="BouncyWall6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 741.947, 531.927 )
+rotation = 0.861883
+scale = Vector2( 1, 13.6 )
+
+[node name="BouncyWall7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 69.6729, 1255.45 )
+rotation = 1.57079
+scale = Vector2( 1, 13.6 )
 
 [node name="BouncyWall2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -2.77514, 397.504 )
-scale = Vector2( 1, 20 )
+position = Vector2( -833.801, 574.789 )
+scale = Vector2( 1, 46.28 )
 
 [node name="BouncyWall3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 510.188, 11.5815 )
-scale = Vector2( 20, 1 )
+position = Vector2( 1155.52, -513.042 )
+scale = Vector2( 74.56, 1 )
 
 [node name="BouncyWall4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 479.066, 597.642 )
-scale = Vector2( 20, 1 )
+position = Vector2( 1088.03, 1887.93 )
+scale = Vector2( 79.28, 1 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 183, 214 )
