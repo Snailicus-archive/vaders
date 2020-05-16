@@ -100,7 +100,7 @@ func melee_attack():
 
 func laser_attack():
 	$Laser.attacking = true
-	
+	$Laser/Body.show()
 	for hurtbox in $Laser/LaserHitBox.get_overlapping_areas():
 		hurtbox.take_damage(damage * damage_mod)
 		print(hurtbox)
@@ -108,6 +108,7 @@ func laser_attack():
 		$Laser/Particles2D.restart()
 	yield(get_tree().create_timer(0.3), "timeout")	
 	$Laser.attacking = false
+	$Laser/Body.hide()
 
 func update():
 	if $Cooldown.is_stopped():

@@ -2,6 +2,10 @@ extends Node2D
 
 var attacking := false
 
+func _ready() -> void:
+	$Body.hide()
+
+
 func set_size(length):
 	$Body.region_rect.end.x = length
 	$LaserHitBox/CollisionShape2D.shape.points[2].x = length

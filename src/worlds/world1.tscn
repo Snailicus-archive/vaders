@@ -10,7 +10,6 @@ extents = Vector2( 2137.93, 1237.07 )
 [node name="World" type="Node"]
 
 [node name="GameArea" type="Area2D" parent="."]
-visible = false
 position = Vector2( 1266.07, 685.071 )
 collision_mask = 12
 script = ExtResource( 1 )

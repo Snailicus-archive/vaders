@@ -1,9 +1,11 @@
 extends "res://src/actors/actor.gd"
 
-# BUG: fix laser going through walls
-
+# TODO: proper testing level(with bounds and enemy zoo)
+# TODO: empower
+# TODO: bounce
 # TODO: implement new weapon scheme
 # REFACTOR: animations with animation tree
+# TODO: aggro for enemies, so they wont stand still when you hit them
 
 
 export(float) var MAX_SPEED := 900
@@ -30,12 +32,11 @@ func _input(event):
 	
 #	if event.is_action_pressed("ui_accept"):
 #		dash(velocity.normalized())
-	
 	if event.is_action_pressed("attack"):
 		weapon.trigger()
 	elif event.is_action_released("attack"):
 		weapon.release()
-	
+
 	if event.is_action_pressed("slot2"):
 		weapon.change_weapon("melee")
 

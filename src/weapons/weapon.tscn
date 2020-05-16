@@ -83,7 +83,7 @@ orbit_velocity = 1.0
 orbit_velocity_random = 1.0
 color_ramp = SubResource( 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=30]
+[sub_resource type="ConvexPolygonShape2D" id=18]
 points = PoolVector2Array( 0, -5, 0, 5, 100, 5, 100, -5 )
 
 [sub_resource type="CanvasItemMaterial" id=19]
@@ -263,7 +263,6 @@ playing = true
 script = ExtResource( 8 )
 
 [node name="Body" type="Sprite" parent="Laser"]
-visible = false
 material = SubResource( 13 )
 texture = ExtResource( 6 )
 centered = false
@@ -291,7 +290,6 @@ __meta__ = {
 }
 
 [node name="RayCast2D" type="RayCast2D" parent="Laser"]
-visible = false
 enabled = true
 cast_to = Vector2( 2000, 0 )
 
@@ -300,7 +298,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/LaserHitBox"]
-shape = SubResource( 30 )
+shape = SubResource( 18 )
 
 [node name="animations" type="Node2D" parent="."]
 visible = false
