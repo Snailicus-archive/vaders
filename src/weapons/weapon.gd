@@ -1,10 +1,15 @@
 extends Node2D
 
-signal shot
+signal emit_bullet(projectile)
+signal emit_laser(projectile)
 
-export(float) var cooldown := 0.5
-export(int) var damage := 1
-export(PackedScene) var projectile
+export(float) var COOLDOWN := 0.5
+export(int) var DAMAGE := 1
+export(PackedScene) var PROJECTILE
+export(PackedScene) var LASER
+
+
+var aim_point = Vector2.ZERO setget ,get_aim_point
 
 var locked := false setget set_locked
 var parent : Node
@@ -32,7 +37,7 @@ func set_locked(_locked):
 	locked = _locked
 
 func _ready():
-	$Cooldown.wait_time = cooldown * cooldown_mod
+	$Cooldown.wait_time = COOLDOWN * cooldown_mod
 	update()
 
 func change_weapon(weapon: String):
@@ -73,7 +78,7 @@ func fire():
 	elif flags.bullet:
 		damage_mod = 1
 		cooldown_mod = 1
-		shoot_projectile()
+		emit_bullet()
 	elif flags.laser:
 		damage_mod = 1
 		cooldown_mod = 5
@@ -84,31 +89,58 @@ func fire():
 		damage_mod *= 2
 		cooldown_mod *= 2
 
-	$Cooldown.wait_time = cooldown * cooldown_mod
+	$Cooldown.wait_time = COOLDOWN * cooldown_mod
 	$Cooldown.start()
-		
-func shoot_projectile():
+
+func emit_bullet():
 	var parent_velocity = parent.velocity if parent else Vector2.ZERO
-	emit_signal("shot", projectile, $Muzzle.global_position,
-		global_rotation, parent_velocity)
+	var p = PROJECTILE.instance()
+	p.global_rotation = global_rotation
+	p.global_position = $Muzzle.global_position
+	p.shoot(parent_velocity)
+	emit_signal("emit_bullet", p)
+
+func emit_laser():
+	var p = LASER.instance()
+	p.global_position = global_position
+	p.global_rotation = global_rotation
+	print((global_position - self.aim_point).length())
+	p.shoot((global_position - self.aim_point).length())
+	emit_signal("emit_laser", p)
 
 func melee_attack():
 	meleeS.frame = 0
 	meleeS.play()
 	for hurtbox in $Hitbox.get_overlapping_areas():
-		hurtbox.take_damage(damage * damage_mod)
+		hurtbox.take_damage(DAMAGE * damage_mod)
 
 func laser_attack():
-	$Laser.attacking = true
-	$Laser/Body.show()
-	for hurtbox in $Laser/LaserHitBox.get_overlapping_areas():
-		hurtbox.take_damage(damage * damage_mod)
-		print(hurtbox)
-		$Laser/Particles2D.global_position = hurtbox.global_position
-		$Laser/Particles2D.restart()
-	yield(get_tree().create_timer(0.3), "timeout")	
-	$Laser.attacking = false
-	$Laser/Body.hide()
+	emit_laser()
+
+func get_aim_point() -> Vector2:
+	var maxdist = Vector2.RIGHT * 10000
+	var space_state = get_world_2d().direct_space_state
+	var result = space_state.intersect_ray(global_position,
+		(global_position + maxdist).rotated(global_rotation), [], 1)
+
+	if result:
+
+		return result.position
+	else:
+		return global_position + maxdist
+
+
+#func laser_attack():
+#	$Laser.attacking = true
+#	$Laser/Body.show()
+#	for hurtbox in $Laser/LaserHitBox.get_overlapping_areas():
+#		hurtbox.take_damage(DAMAGE * damage_mod)
+#		print(hurtbox)
+#		$Laser/Particles2D.global_position = hurtbox.global_position
+#		$Laser/Particles2D.restart()
+#	yield(get_tree().create_timer(0.3), "timeout")
+#	$Laser.attacking = false
+#	$Laser/Body.hide()
 
 func update():
 	if $Cooldown.is_stopped():
@@ -121,7 +153,7 @@ func update():
 			meleeS.hide()
 			laserS.hide()
 		elif flags.laser:
-			laserS.show()
+#			laserS.show()
 			bulletS.hide()
 			meleeS.hide()
 			

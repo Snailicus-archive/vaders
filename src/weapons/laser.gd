@@ -1,31 +1,19 @@
-extends Node2D
+extends Line2D
 
-var attacking := false
+export var DAMAGE := 1
+export var LIFETIME := 0.3
 
 func _ready() -> void:
-	$Body.hide()
+	yield(get_tree().create_timer(LIFETIME), "timeout")
+	queue_free()
 
-
-func set_size(length):
-	$Body.region_rect.end.x = length
-	$LaserHitBox/CollisionShape2D.shape.points[2].x = length
-	$LaserHitBox/CollisionShape2D.shape.points[3].x = length
-
-func set_attack(val):
-	if val:
-		set_physics_process(true)
-		_physics_process(0)
-	else:
-		set_size(0)
-		set_physics_process(false)
-		
-	attacking = val
-		
-
-func _physics_process(delta: float) -> void:
-	if $RayCast2D.is_colliding():
-		$End.global_position = $RayCast2D.get_collision_point()
-	else:
-		$End.global_position = $RayCast2D.cast_to
+func shoot(length: float):
+	self.points[1] = Vector2(length, 0)
 	
-	set_size($End.position.length())
+	$Hitbox/CollisionShape2D.shape.points[0] = Vector2(0,self.width/2)
+	$Hitbox/CollisionShape2D.shape.points[1] = Vector2(0,-self.width/2)
+	$Hitbox/CollisionShape2D.shape.points[2] = Vector2(length,-self.width/2)
+	$Hitbox/CollisionShape2D.shape.points[3] = Vector2(length,self.width/2)
+
+func _on_Hitbox_area_entered(area: Area2D) -> void:
+	area.take_damage(DAMAGE)

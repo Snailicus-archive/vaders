@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/laser.png" type="Texture" id=5]
 [ext_resource path="res://assets/Beam.png" type="Texture" id=6]
 [ext_resource path="res://assets/Begin.png" type="Texture" id=7]
-[ext_resource path="res://src/weapons/laser.gd" type="Script" id=8]
+[ext_resource path="res://src/weapons/laser.tscn" type="PackedScene" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -227,8 +227,8 @@ states/StateMachine/position = Vector2( 115, 96 )
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 2 )
-cooldown = 0.1
-projectile = ExtResource( 1 )
+PROJECTILE = ExtResource( 1 )
+LASER = ExtResource( 9 )
 
 [node name="Bullet" type="Sprite" parent="."]
 visible = false
@@ -260,7 +260,7 @@ frame = 9
 playing = true
 
 [node name="Laser" type="Node2D" parent="."]
-script = ExtResource( 8 )
+visible = false
 
 [node name="Body" type="Sprite" parent="Laser"]
 material = SubResource( 13 )
@@ -288,10 +288,6 @@ texture = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="RayCast2D" type="RayCast2D" parent="Laser"]
-enabled = true
-cast_to = Vector2( 20000, 0 )
 
 [node name="LaserHitBox" type="Area2D" parent="Laser"]
 collision_layer = 0
