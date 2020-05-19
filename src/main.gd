@@ -13,6 +13,5 @@ func _on_Player_bullet_attack(p):
 func _on_Player_laser_attack(p):
 	add_child(p)
 
-
 func _on_Player_died() -> void:
 	pass # Replace with function body.
