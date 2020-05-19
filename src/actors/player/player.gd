@@ -5,6 +5,7 @@ extends "res://src/actors/actor.gd"
 # TODO: bounce
 # TODO: implement new weapon scheme
 # REFACTOR: animations with animation tree
+# REFACTOR: add stats to weapons and etc functions
 # TODO: aggro for enemies, so they wont stand still when you hit them
 
 
@@ -25,12 +26,12 @@ onready var camera := $CameraPivot/Offset/Camera
 
 func _ready():
 	weapon.parent = self
-	weapon.change_weapon("bullet")
+	weapon.change_weapon("Bullet")
 
 func _input(event):
 	if event.is_action_pressed("slot3"):
-		weapon.change_weapon("laser")
-	
+		weapon.change_weapon("Laser")
+
 #	if event.is_action_pressed("ui_accept"):
 #		dash(velocity.normalized())
 	if event.is_action_pressed("attack"):
@@ -39,10 +40,10 @@ func _input(event):
 		weapon.release()
 
 	if event.is_action_pressed("slot2"):
-		weapon.change_weapon("melee")
+		weapon.change_weapon("Melee")
 
 	if event.is_action_pressed("slot1"):
-		weapon.change_weapon("bullet")
+		weapon.change_weapon("Bullet")
 
 func _physics_process(delta):
 	# turning
