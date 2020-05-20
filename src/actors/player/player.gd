@@ -4,6 +4,13 @@ extends "res://src/actors/actor.gd"
 # TODO: empower
 # TODO: bounce
 # TODO: implement new weapon scheme
+# TODO: weapons atm are behavioral sigils. a projectile is but a manefstation of one
+# 	and each projectile gets another sigil, which is the action that is taken upon
+#	each target
+# TODO: weapon stats that get propagagted down
+# TODO: switch weapons *properly*
+
+
 # REFACTOR: animations with animation tree
 # REFACTOR: add stats to weapons and etc functions
 # TODO: aggro for enemies, so they wont stand still when you hit them
@@ -40,7 +47,7 @@ func _input(event):
 		weapon.release()
 
 	if event.is_action_pressed("slot2"):
-		weapon.change_weapon("Melee")
+		weapon.change_weapon("Cone")
 
 	if event.is_action_pressed("slot1"):
 		weapon.change_weapon("Bullet")

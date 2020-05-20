@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/weapons/cone.gd" type="Script" id=1]
+[ext_resource path="res://assets/Dragon_Breath.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 217, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 434, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 651, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 217, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 434, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 651, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 448, 217, 224 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Cone" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Model" type="AnimatedSprite" parent="."]
+position = Vector2( 118.548, 30.01 )
+rotation = 4.71239
+scale = Vector2( 2.67281, 1.60268 )
+frames = SubResource( 11 )
+frame = 6
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Hitbox"]
+position = Vector2( 0.902527, 0 )
+polygon = PoolVector2Array( -1.06836, -1.46353, 153.273, 167.535, 267.891, 171.145, 273.306, -124.875, 56.7054, -82.4572 )
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

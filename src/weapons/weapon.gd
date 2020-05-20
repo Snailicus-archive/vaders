@@ -1,9 +1,5 @@
 extends Node2D
 
-
-signal emit_bullet(projectile)
-signal emit_laser(projectile)
-
 export(float) var COOLDOWN := 0.5
 export(int) var DAMAGE := 1
 export(PackedScene) var PROJECTILE
@@ -17,14 +13,16 @@ var queue_shot := false
 var cooldown_mod := 1.0
 var damage_mod := 1
 
+onready var weapons = $Weapons
+
 func _ready():
-	for weapon in $Models.get_children():
+	for weapon in weapons.get_children():
 		weapon.hide()
 	$Cooldown.wait_time = COOLDOWN * cooldown_mod
 	change_weapon('Laser')
 
 func change_weapon(name: String):
-	var w = $Models.get_node(name)
+	var w = weapons.get_node(name)
 	if active_weapon == w:
 		return
 
@@ -54,17 +52,11 @@ func _on_Cooldown_timeout():
 
 func fire():
 	match active_weapon.name:
-		'Melee':
-			damage_mod = 5
-			cooldown_mod = 5
-			melee_attack()
+		'Cone':
+			cone_attack()
 		'Bullet':
-			damage_mod = 1
-			cooldown_mod = 1
-			emit_bullet()
+			bullet_attack()
 		'Laser':
-			damage_mod = 1
-			cooldown_mod = 5
 			laser_attack()
 		_:
 			print('Either melee or bullet must be active.')
@@ -72,30 +64,15 @@ func fire():
 	$Cooldown.wait_time = COOLDOWN * cooldown_mod
 	$Cooldown.start()
 
-func emit_bullet():
+func cone_attack():
+	active_weapon.action(self.global_position, self.global_rotation)
+
+func bullet_attack():
 	var parent_velocity = parent.velocity if parent else Vector2.ZERO
-	var p = PROJECTILE.instance()
-	p.global_rotation = global_rotation
-	p.global_position = $Muzzle.global_position
-	p.shoot(parent_velocity)
-	emit_signal("emit_bullet", p)
-
-func emit_laser():
-	var p = LASER.instance()
-	p.global_position = global_position
-	p.global_rotation = global_rotation
-	print((global_position - self.aim_point).length())
-	p.shoot((global_position - self.aim_point).length())
-	emit_signal("emit_laser", p)
-
-func melee_attack():
-	$Models/Melee.frame = 0
-	$Models/Melee.play()
-	for hurtbox in $Hitbox.get_overlapping_areas():
-		hurtbox.take_damage(DAMAGE * damage_mod)
+	active_weapon.action(self.global_position, self.global_rotation, parent_velocity)
 
 func laser_attack():
-	emit_laser()
+	active_weapon.action(self.global_position, self.aim_point)
 
 func get_aim_point() -> Vector2:
 	var maxdist = Vector2.RIGHT * 10000
