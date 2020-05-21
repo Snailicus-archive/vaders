@@ -102,6 +102,4 @@ func _on_taken_damage(x):
 	._on_taken_damage(x)
 
 func set_locked(_locked):
-	print(_locked)
-	weapon.locked = _locked
 	locked = _locked

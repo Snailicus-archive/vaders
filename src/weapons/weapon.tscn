@@ -65,6 +65,7 @@ height = 6.82434
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 2 )
+COOLDOWN = 0.1
 PROJECTILE = ExtResource( 1 )
 LASER = ExtResource( 9 )
 
@@ -104,7 +105,7 @@ frame = 9
 playing = true
 
 [node name="Cooldown" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 one_shot = true
 
 [node name="Muzzle" type="Position2D" parent="."]

@@ -7,18 +7,18 @@ export(PackedScene) var LASER
 
 var aim_point = Vector2.ZERO setget ,get_aim_point
 var active_weapon: Node
-var locked := false setget set_locked
 var parent: Node
-var queue_shot := false
 var cooldown_mod := 1.0
 var damage_mod := 1
 
+onready var cooldown = $Cooldown
 onready var weapons = $Weapons
 
 func _ready():
 	for weapon in weapons.get_children():
 		weapon.hide()
-	$Cooldown.wait_time = COOLDOWN * cooldown_mod
+	cooldown.wait_time = COOLDOWN * cooldown_mod
+	print(cooldown.wait_time)
 	change_weapon('Laser')
 
 func change_weapon(name: String):
@@ -32,22 +32,18 @@ func change_weapon(name: String):
 	active_weapon = w
 	active_weapon.show()
 
-func set_locked(_locked):
-	if not _locked and queue_shot:
-		fire()
-	locked = _locked
 
 func trigger():
-	if $Cooldown.is_stopped() and not locked:
+	if cooldown.is_stopped():
 		fire()
-	queue_shot = true
+		cooldown.start()
+	cooldown.one_shot = false
 
 func release():
-	queue_shot = false
+	cooldown.one_shot = true
 
 func _on_Cooldown_timeout():
-	update()
-	if queue_shot and not locked:
+	if not cooldown.one_shot:
 		fire()
 
 func fire():
@@ -60,9 +56,6 @@ func fire():
 			laser_attack()
 		_:
 			print('Either melee or bullet must be active.')
-
-	$Cooldown.wait_time = COOLDOWN * cooldown_mod
-	$Cooldown.start()
 
 func cone_attack():
 	active_weapon.action(self.global_position, self.global_rotation)

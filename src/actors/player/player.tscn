@@ -39,7 +39,6 @@ shape = SubResource( 3 )
 position = Vector2( 45, 0 )
 
 [node name="Weapon" parent="Pivot/Offset" index="0" instance=ExtResource( 2 )]
-COOLDOWN = 0.1
 
 [node name="CameraPivot" type="Position2D" parent="." index="4"]
 script = ExtResource( 5 )
