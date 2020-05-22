@@ -4,13 +4,14 @@ export(float) var turn_speed = 10
 export(float) var max_speed = 400
 export(float) var acceleration = 300
 
-onready var velocity: Vector2
-
 var target
 var repulsion_force
 var repelled = {}
 
 func _physics_process(delta):
+	move(delta)
+
+func move(delta):
 	var my_dir = Vector2.RIGHT.rotated(rotation)
 	if target:
 		var target_dir = (target.global_position - global_position).normalized()
@@ -23,7 +24,6 @@ func _physics_process(delta):
 			velocity = Movement.approach(velocity, velocity_target, acceleration * delta)
 		else:
 			velocity = Movement.approach(velocity, Vector2.ZERO, acceleration * delta)
-
 
 	var collision = move_and_collide(velocity * delta)
 	if collision:

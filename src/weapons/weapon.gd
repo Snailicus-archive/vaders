@@ -21,6 +21,15 @@ func _ready():
 	print(cooldown.wait_time)
 	change_weapon('Laser')
 
+func trigger():
+	if cooldown.is_stopped():
+		fire()
+		cooldown.start()
+	cooldown.one_shot = false
+
+func release():
+	cooldown.one_shot = true
+
 func change_weapon(name: String):
 	var w = weapons.get_node(name)
 	if active_weapon == w:
@@ -31,16 +40,6 @@ func change_weapon(name: String):
 
 	active_weapon = w
 	active_weapon.show()
-
-
-func trigger():
-	if cooldown.is_stopped():
-		fire()
-		cooldown.start()
-	cooldown.one_shot = false
-
-func release():
-	cooldown.one_shot = true
 
 func _on_Cooldown_timeout():
 	if not cooldown.one_shot:
