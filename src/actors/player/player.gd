@@ -25,27 +25,27 @@ var locked := false setget set_locked
 var max_speed := MAX_SPEED
 var acceleration := ACCELERATION
 
-onready var weapon := $Pivot/Offset/Weapon
+onready var arsenal := $Pivot/Offset/Arsenal
 onready var camera := $CameraPivot/Offset/Camera
 
 func _ready():
-	weapon.parent = self
-	weapon.change_weapon("Bullet")
+	arsenal.parent = self
+	arsenal.change_form("Bullet")
 
 func _input(event):
 	if event.is_action_pressed("slot3"):
-		weapon.change_weapon("Laser")
+		arsenal.change_form("Laser")
 
 	if event.is_action_pressed("attack"):
-		weapon.trigger()
+		arsenal.trigger()
 	elif event.is_action_released("attack"):
-		weapon.release()
+		arsenal.release()
 
 	if event.is_action_pressed("slot2"):
-		weapon.change_weapon("Cone")
+		arsenal.change_form("Cone")
 
 	if event.is_action_pressed("slot1"):
-		weapon.change_weapon("Bullet")
+		arsenal.change_form("Bullet")
 
 func _physics_process(delta):
 	# turning

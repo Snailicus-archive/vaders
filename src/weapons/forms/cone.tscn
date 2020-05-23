@@ -1,0 +1,65 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/weapons/forms/cone_form.gd" type="Script" id=1]
+[ext_resource path="res://src/weapons/projectiles/cone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Dragon_Breath.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 217, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 434, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 651, 0, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 217, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 434, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 651, 224, 217, 224 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 448, 217, 224 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Cone" type="Node2D" groups=[
+"ProjectileEmitters",
+]]
+script = ExtResource( 1 )
+PROJECTILE = ExtResource( 2 )
+
+[node name="Sigils" type="Node" parent="."]
+
+[node name="Model" type="AnimatedSprite" parent="."]
+position = Vector2( 0.418701, 15.9104 )
+rotation = 1.5708
+scale = Vector2( 0.7, 0.3 )
+frames = SubResource( 11 )
+frame = 9
+playing = true

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/weapons/arsenal.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 56.2968
+height = 6.82434
+
+[node name="Arsenal" type="Node2D"]
+script = ExtResource( 4 )
+COOLDOWN = 0.1
+
+[node name="Forms" type="Node2D" parent="."]
+
+[node name="Quake" type="Node2D" parent="Forms"]
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Muzzle" type="Position2D" parent="."]
+position = Vector2( 20, 0 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 8, 0 )
+shape = SubResource( 1 )
+[connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]

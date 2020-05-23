@@ -2,24 +2,22 @@ extends Node2D
 
 export(float) var COOLDOWN := 0.5
 export(int) var DAMAGE := 1
-export(PackedScene) var PROJECTILE
-export(PackedScene) var LASER
 
-var aim_point = Vector2.ZERO setget ,get_aim_point
-var active_weapon: Node
 var parent: Node
+var aim_point = Vector2.ZERO setget ,get_aim_point
+var active_form: Node
 var cooldown_mod := 1.0
 var damage_mod := 1
 
 onready var cooldown = $Cooldown
-onready var weapons = $Weapons
+onready var forms = $Forms
 
 func _ready():
-	for weapon in weapons.get_children():
-		weapon.hide()
+	for form in forms.get_children():
+		form.hide()
 	cooldown.wait_time = COOLDOWN * cooldown_mod
 	print(cooldown.wait_time)
-	change_weapon('Laser')
+	change_form('Laser')
 
 func trigger():
 	if cooldown.is_stopped():
@@ -30,23 +28,23 @@ func trigger():
 func release():
 	cooldown.one_shot = true
 
-func change_weapon(name: String):
-	var w = weapons.get_node(name)
-	if active_weapon == w:
+func change_form(name: String):
+	var f = forms.get_node(name)
+	if active_form == f:
 		return
 
-	if active_weapon:
-		active_weapon.hide()
+	if active_form:
+		active_form.hide()
 
-	active_weapon = w
-	active_weapon.show()
+	active_form = f
+	active_form.show()
 
 func _on_Cooldown_timeout():
 	if not cooldown.one_shot:
 		fire()
 
 func fire():
-	match active_weapon.name:
+	match active_form.name:
 		'Cone':
 			cone_attack()
 		'Bullet':
@@ -57,14 +55,14 @@ func fire():
 			print('Either melee or bullet must be active.')
 
 func cone_attack():
-	active_weapon.action(self.global_position, self.global_rotation)
+	active_form.action(self.global_position, self.global_rotation)
 
 func bullet_attack():
 	var parent_velocity = parent.velocity if parent else Vector2.ZERO
-	active_weapon.action(self.global_position, self.global_rotation, parent_velocity)
+	active_form.action(self.global_position, self.global_rotation, parent_velocity)
 
 func laser_attack():
-	active_weapon.action(self.global_position, self.aim_point)
+	active_form.action(self.global_position, self.aim_point)
 
 func get_aim_point() -> Vector2:
 	var maxdist = Vector2.RIGHT * 10000

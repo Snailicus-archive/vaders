@@ -3,12 +3,11 @@ extends Node2D
 signal emitted_projectile(p)
 
 export(PackedScene) var PROJECTILE
-export(Array, PackedScene) var mods
 
 func action(from, direction, parent_velocity):
 	var p = PROJECTILE.instance()
-	for mod in mods:
-		p.get_node('Mods').add_child(mod.instance())
+	for sigil in $Sigils.get_children():
+		p.get_node('Sigils').add_child(sigil.duplicate(7))
 
 	p.global_rotation = direction
 	p.global_position = from
