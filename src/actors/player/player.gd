@@ -9,7 +9,8 @@ extends "res://src/actors/actor.gd"
 #	each target
 # TODO: weapon stats that get propagagted down
 # TODO: switch weapons *properly*
-
+# TODO: Replace Forms with basic weapons, and turn Arsenal
+#	into a weapon switching mechanism
 
 # REFACTOR: animations with animation tree
 # REFACTOR: add stats to weapons and etc functions

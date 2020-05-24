@@ -54,6 +54,9 @@ func fire():
 		_:
 			print('Either melee or bullet must be active.')
 
+func attack():
+	pass
+
 func cone_attack():
 	active_form.action(self.global_position, self.global_rotation)
 

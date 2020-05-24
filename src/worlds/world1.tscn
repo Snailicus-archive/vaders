@@ -1,21 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/environment/game_area.gd" type="Script" id=1]
 [ext_resource path="res://src/environment/bouncy_wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actors/enemies/enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/worlds/spawner.gd" type="Script" id=4]
 [ext_resource path="res://assets/wallpapers.png" type="Texture" id=5]
+[ext_resource path="res://assets/Begin.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2137.93, 1237.07 )
 
-[node name="World" type="Node"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 150.0
 
-[node name="Wallpaper" type="Sprite" parent="."]
-position = Vector2( -1737.86, -881.762 )
-texture = ExtResource( 5 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 6000, 3000 )
+[node name="World" type="Node"]
 
 [node name="GameArea" type="Area2D" parent="."]
 visible = false
@@ -30,34 +28,44 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea"]
 shape = SubResource( 1 )
 
-[node name="BouncyWall" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3370.75, 528.912 )
+[node name="Wallpaper" type="Sprite" parent="."]
+position = Vector2( -1737.86, -881.762 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 3000 )
+
+[node name="Walls" type="Node2D" parent="."]
+position = Vector2( 1266.07, 685.071 )
+
+[node name="BouncyWall" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 2104.68, -156.159 )
 scale = Vector2( 1, 47 )
 
-[node name="BouncyWall5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1974.95, 700.749 )
+[node name="BouncyWall5" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 708.88, 15.678 )
 scale = Vector2( 1, 13.6 )
 
-[node name="BouncyWall6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 741.947, 531.927 )
+[node name="BouncyWall6" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( -524.123, -153.144 )
 rotation = 0.861883
 scale = Vector2( 1, 13.6 )
 
-[node name="BouncyWall7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 69.6729, 1255.45 )
+[node name="BouncyWall7" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( -1196.4, 570.379 )
 rotation = 1.57079
 scale = Vector2( 1, 13.6 )
 
-[node name="BouncyWall2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -833.801, 574.789 )
+[node name="BouncyWall2" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( -2099.87, -110.282 )
 scale = Vector2( 1, 46.28 )
 
-[node name="BouncyWall3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1155.52, -513.042 )
+[node name="BouncyWall3" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( -110.55, -1198.11 )
 scale = Vector2( 74.56, 1 )
 
-[node name="BouncyWall4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1088.03, 1887.93 )
+[node name="BouncyWall4" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( -178.04, 1202.86 )
 scale = Vector2( 79.28, 1 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
@@ -74,4 +82,35 @@ position = Vector2( 144, 403 )
 
 [node name="Enemy5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 93, 303 )
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2( 2657.55, 439.005 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Spawner"]
+scale = Vector2( 9, 9 )
+texture = ExtResource( 6 )
+
+[node name="Hurtbox" type="Area2D" parent="Spawner"]
+monitorable = false
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner/Hurtbox"]
+shape = SubResource( 2 )
+
+[node name="SpawnPoint" type="Position2D" parent="Spawner"]
+position = Vector2( 3.0686, 449.991 )
+__meta__ = {
+"_gizmo_extents_": 300.0
+}
+
+[node name="Sprite2" type="Sprite" parent="Spawner/SpawnPoint"]
+modulate = Color( 1, 0, 0, 0.231373 )
+scale = Vector2( 15, 15 )
+texture = ExtResource( 6 )
 [connection signal="body_exited" from="GameArea" to="GameArea" method="_on_GameArea_body_exited"]
+[connection signal="area_entered" from="Spawner/Hurtbox" to="Spawner" method="_on_Hurtbox_area_entered"]
