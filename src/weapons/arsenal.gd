@@ -3,12 +3,11 @@ extends Node2D
 export(float) var COOLDOWN := 0.5
 export(int) var DAMAGE := 1
 
-var parent: Node
+var parent: Node setget set_parent
 var aim_point = Vector2.ZERO setget ,get_aim_point
 var active_weapon: Node
 var cooldown_mod := 1.0
 var damage_mod := 1
-var sigils: Array #for ease of use and testing. will be deleted later.
 
 onready var cooldown = $Cooldown
 onready var weapons = $Weapons
@@ -17,23 +16,21 @@ func _ready():
 	for weapon in weapons.get_children():
 		weapon.hide()
 	cooldown.wait_time = COOLDOWN * cooldown_mod
-	change_form('Laser')
+	change_weapon('Laser')
 
 	DebugInfo.add_stat("Weapon triggering", self, "_weapon_triggered", true)
 
-	for sigil in $Sigils.get_children():
-		sigils.append(sigil)
 
 func trigger():
 	if cooldown.is_stopped():
-		action(get_params())
+		action()
 		cooldown.start()
 	cooldown.one_shot = false
 
 func release():
 	cooldown.one_shot = true
 
-func change_form(name: String):
+func change_weapon(name: String):
 	var f = weapons.get_node(name)
 	if active_weapon == f:
 		return
@@ -46,10 +43,10 @@ func change_form(name: String):
 
 func _on_Cooldown_timeout():
 	if not cooldown.one_shot:
-		action(get_params())
+		action()
 
-func action(params):
-	active_weapon.action(get_params())
+func action():
+	active_weapon.action()
 	
 func attack():
 	pass
@@ -65,14 +62,10 @@ func get_aim_point() -> Vector2:
 	else:
 		return global_position + maxdist
 
-func get_params():
-	return {
-		"from": self.global_position,
-		"direction": self.global_rotation,
-		"to": self.aim_point,
-		"parent_velocity": (parent.velocity if parent else Vector2.ZERO),
-		"sigils": self.sigils # sigils here or standalone? eh
-	}
+func set_parent(val):
+	parent = val
+	for weapon in $Weapons.get_children():
+		weapon.parent = val
 
 func _weapon_triggered() -> bool:
 	return not cooldown.one_shot

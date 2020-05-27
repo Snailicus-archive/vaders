@@ -4,45 +4,45 @@
 [ext_resource path="res://src/weapons/projectiles/cone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Dragon_Breath.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 217, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 434, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 651, 0, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 217, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
 region = Rect2( 434, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
 region = Rect2( 651, 224, 217, 224 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 448, 217, 224 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 2 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 1 ) ],
 "loop": false,
 "name": "default",
 "speed": 5.0
@@ -54,12 +54,14 @@ animations = [ {
 script = ExtResource( 1 )
 PROJECTILE = ExtResource( 2 )
 
+[node name="Muzzle" type="Position2D" parent="."]
+
 [node name="Sigils" type="Node" parent="."]
 
 [node name="Model" type="AnimatedSprite" parent="."]
 position = Vector2( 0.418701, 15.9104 )
 rotation = 1.5708
 scale = Vector2( 0.7, 0.3 )
-frames = SubResource( 11 )
+frames = SubResource( 10 )
 frame = 9
 playing = true

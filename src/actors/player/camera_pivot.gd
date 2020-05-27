@@ -4,7 +4,7 @@ onready var parent = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotation = parent.velocity.angle()
+	rotation = parent.stats.velocity.angle()
 
 func _physics_process(delta):
-	rotation = parent.velocity.angle()
+	rotation = parent.stats.velocity.angle()

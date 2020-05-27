@@ -22,7 +22,6 @@ export(float) var MAX_SPEED := 900
 export(float) var ACCELERATION := 4000
 export(float) var TURN_SPEED := 10
 
-var locked := false setget set_locked
 
 var max_speed := MAX_SPEED
 var acceleration := ACCELERATION
@@ -31,14 +30,13 @@ onready var arsenal := $Pivot/Offset/Arsenal
 onready var camera := $CameraPivot/Offset/Camera
 
 func _ready():
+	._ready()
 	arsenal.parent = self
-	arsenal.change_form("Bullet")
-	DebugInfo.add_stat("Player position", self, "position", false)
-	DebugInfo.add_stat("Player velocity", self, "velocity", false)
-
+	arsenal.change_weapon("Bullet")
+	
 func _input(event):
 	if event.is_action_pressed("slot3"):
-		arsenal.change_form("Laser")
+		arsenal.change_weapon("Laser")
 
 	if event.is_action_pressed("attack"):
 		arsenal.trigger()
@@ -46,36 +44,35 @@ func _input(event):
 		arsenal.release()
 
 	if event.is_action_pressed("slot2"):
-		arsenal.change_form("Cone")
+		arsenal.change_weapon("Cone")
 
 	if event.is_action_pressed("slot1"):
-		arsenal.change_form("Bullet")
+		arsenal.change_weapon("Bullet")
 
 func _physics_process(delta):
 	# turning
 	var mouse_pos = get_global_mouse_position()
 	var turn_target = $Pivot.get_angle_to(mouse_pos)
-	if not locked:
-		if abs(turn_target) < TURN_SPEED * delta:
-			$Pivot.rotation += turn_target
-		else:
-			$Pivot.rotation += sign(turn_target) * TURN_SPEED * delta
+	if abs(turn_target) < TURN_SPEED * delta:
+		$Pivot.rotation += turn_target
+	else:
+		$Pivot.rotation += sign(turn_target) * TURN_SPEED * delta
 
 	move(delta)
 
 func move(delta):
 	var velocity_target = get_direction() * max_speed
 
-	velocity = Movement.approach(velocity, 
+	stats.velocity = Movement.approach(stats.velocity, 
 		velocity_target, acceleration*delta)
 
-	if velocity:
-		$Sprite.rotation = velocity.angle() + PI/2
+	if stats.velocity:
+		$Sprite.rotation = stats.velocity.angle() + PI/2
 
-	var collision = move_and_collide(velocity * delta)
+	var collision = move_and_collide(stats.velocity * delta)
 	if collision:
 		if collision.collider:
-			velocity = velocity.slide(collision.normal)
+			stats.velocity = stats.velocity.slide(collision.normal)
 
 func get_direction():
 	var direction = Vector2()
@@ -91,6 +88,3 @@ func get_direction():
 
 func _on_taken_damage(x):
 	._on_taken_damage(x)
-
-func set_locked(_locked):
-	locked = _locked

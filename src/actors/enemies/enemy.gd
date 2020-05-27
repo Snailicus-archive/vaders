@@ -17,17 +17,17 @@ func move(delta):
 		var target_dir = (target.global_position - global_position).normalized()
 		rotation = Movement.turn_to(my_dir, target_dir, turn_speed * delta).angle()
 	if repulsion_force and not (target and target.position.distance_to(position) < 300):
-		velocity = Movement.approach(velocity, repulsion_force * max_speed, acceleration * delta)
+		stats.velocity = Movement.approach(stats.velocity, repulsion_force * max_speed, acceleration * delta)
 	else:
 		if target:
 			var velocity_target = Vector2.RIGHT.rotated(rotation) * max_speed
-			velocity = Movement.approach(velocity, velocity_target, acceleration * delta)
+			stats.velocity = Movement.approach(stats.velocity, velocity_target, acceleration * delta)
 		else:
-			velocity = Movement.approach(velocity, Vector2.ZERO, acceleration * delta)
+			stats.velocity = Movement.approach(stats.velocity, Vector2.ZERO, acceleration * delta)
 
-	var collision = move_and_collide(velocity * delta)
+	var collision = move_and_collide(stats.velocity * delta)
 	if collision:
-		velocity = velocity.slide(collision.normal)
+		stats.velocity = stats.velocity.slide(collision.normal)
 
 func _on_Detection_body_entered(body):
 	target = body

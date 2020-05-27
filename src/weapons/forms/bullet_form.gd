@@ -4,22 +4,18 @@ signal emitted_projectile(p)
 
 export(PackedScene) var PROJECTILE
 
-#func action(from, direction, parent_velocity):
-#	var p = PROJECTILE.instance()
-#	for sigil in $Sigils.get_children():
-#		p.get_node('Sigils').add_child(sigil.duplicate(7))
-#
-#	p.global_rotation = direction
-#	p.global_position = from
-#	p.shoot(parent_velocity)
-#	emit_signal("emitted_projectile", p)
+var parent: Node
 
-func action(params):
+func _ready() -> void:
+	$Trigger.action = funcref(self, "action")
+
+func action():
+	var params = parent.stats
 	var p = PROJECTILE.instance()
-	for sigil in params["sigils"]:
+	for sigil in $Sigils.get_children():
 		p.get_node('Sigils').add_child(sigil.duplicate(7))
 
-	p.global_rotation = params["direction"]
-	p.global_position = params["from"]
-	p.shoot(params["parent_velocity"])
+	p.global_rotation = global_rotation
+	p.global_position = $Muzzle.global_position
+	p.shoot(params.velocity)
 	emit_signal("emitted_projectile", p)
