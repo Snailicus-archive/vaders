@@ -11,6 +11,7 @@ extends "res://src/actors/actor.gd"
 # TODO: switch weapons *properly*
 # TODO: Replace Forms with basic weapons, and turn Arsenal
 #	into a weapon switching mechanism
+# TODO: change bullet to check group of collided objects on top of layers.(for enemy spawner)
 
 # REFACTOR: animations with animation tree
 # REFACTOR: add stats to weapons and etc functions
@@ -32,6 +33,8 @@ onready var camera := $CameraPivot/Offset/Camera
 func _ready():
 	arsenal.parent = self
 	arsenal.change_form("Bullet")
+	DebugInfo.add_stat("Player position", self, "position", false)
+	DebugInfo.add_stat("Player velocity", self, "velocity", false)
 
 func _input(event):
 	if event.is_action_pressed("slot3"):
@@ -87,7 +90,6 @@ func get_direction():
 	return direction.normalized()
 
 func _on_taken_damage(x):
-	print('ouch')
 	._on_taken_damage(x)
 
 func set_locked(_locked):

@@ -5,23 +5,28 @@ export(int) var DAMAGE := 1
 
 var parent: Node
 var aim_point = Vector2.ZERO setget ,get_aim_point
-var active_form: Node
+var active_weapon: Node
 var cooldown_mod := 1.0
 var damage_mod := 1
+var sigils: Array #for ease of use and testing. will be deleted later.
 
 onready var cooldown = $Cooldown
-onready var forms = $Forms
+onready var weapons = $Weapons
 
 func _ready():
-	for form in forms.get_children():
-		form.hide()
+	for weapon in weapons.get_children():
+		weapon.hide()
 	cooldown.wait_time = COOLDOWN * cooldown_mod
-	print(cooldown.wait_time)
 	change_form('Laser')
+
+	DebugInfo.add_stat("Weapon triggering", self, "_weapon_triggered", true)
+
+	for sigil in $Sigils.get_children():
+		sigils.append(sigil)
 
 func trigger():
 	if cooldown.is_stopped():
-		fire()
+		action(get_params())
 		cooldown.start()
 	cooldown.one_shot = false
 
@@ -29,43 +34,25 @@ func release():
 	cooldown.one_shot = true
 
 func change_form(name: String):
-	var f = forms.get_node(name)
-	if active_form == f:
+	var f = weapons.get_node(name)
+	if active_weapon == f:
 		return
 
-	if active_form:
-		active_form.hide()
+	if active_weapon:
+		active_weapon.hide()
 
-	active_form = f
-	active_form.show()
+	active_weapon = f
+	active_weapon.show()
 
 func _on_Cooldown_timeout():
 	if not cooldown.one_shot:
-		fire()
+		action(get_params())
 
-func fire():
-	match active_form.name:
-		'Cone':
-			cone_attack()
-		'Bullet':
-			bullet_attack()
-		'Laser':
-			laser_attack()
-		_:
-			print('Either melee or bullet must be active.')
-
+func action(params):
+	active_weapon.action(get_params())
+	
 func attack():
 	pass
-
-func cone_attack():
-	active_form.action(self.global_position, self.global_rotation)
-
-func bullet_attack():
-	var parent_velocity = parent.velocity if parent else Vector2.ZERO
-	active_form.action(self.global_position, self.global_rotation, parent_velocity)
-
-func laser_attack():
-	active_form.action(self.global_position, self.aim_point)
 
 func get_aim_point() -> Vector2:
 	var maxdist = Vector2.RIGHT * 10000
@@ -77,3 +64,15 @@ func get_aim_point() -> Vector2:
 		return result.position
 	else:
 		return global_position + maxdist
+
+func get_params():
+	return {
+		"from": self.global_position,
+		"direction": self.global_rotation,
+		"to": self.aim_point,
+		"parent_velocity": (parent.velocity if parent else Vector2.ZERO),
+		"sigils": self.sigils # sigils here or standalone? eh
+	}
+
+func _weapon_triggered() -> bool:
+	return not cooldown.one_shot
