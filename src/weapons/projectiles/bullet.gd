@@ -2,16 +2,19 @@ extends KinematicBody2D
 
 export(float) var SPEED := 1200
 export(int) var DAMAGE := 1
-export var INTENSITY := 1
 
 var velocity := Vector2()
+var stats
 
 func _ready():
 	yield($Lifetime, "timeout")
 	queue_free()
 
-func shoot(parent_velocity):
+func init(_stats):
 	# this ensures the bullet doesnt lose speed, but is also affected by parent's velocity.
+	stats = _stats.duplicate()
+	var parent_velocity = stats.velocity
+
 	var my_dir := Vector2(1, 0).rotated(rotation)
 	var rejection = parent_velocity.slide(my_dir)
 	velocity = (my_dir * SPEED + rejection).normalized() * SPEED
@@ -26,9 +29,8 @@ func apply_sigils(params: Dictionary, target: Node):
 		sigil.apply(params, target)
 
 func _on_Hitbox_area_entered(area: Area2D) -> void:
-	var params = {
-		intensity = INTENSITY,
-		direction = velocity.normalized()
-	}
-	apply_sigils(params, area.get_parent())
+	var _stats = stats.duplicate()
+	_stats['direction'] = velocity.normalized()
+
+	apply_sigils(_stats, area.get_parent())
 	queue_free()

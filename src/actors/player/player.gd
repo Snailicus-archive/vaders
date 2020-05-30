@@ -12,6 +12,9 @@ extends "res://src/actors/actor.gd"
 # TODO: Replace Forms with basic weapons, and turn Arsenal
 #	into a weapon switching mechanism
 # TODO: change bullet to check group of collided objects on top of layers.(for enemy spawner)
+# TODO: subdivide Weapon into trigger, barrel etc
+# TODO: replace sigils with flags in stats
+# TODO: put everything in stats.
 
 # REFACTOR: animations with animation tree
 # REFACTOR: add stats to weapons and etc functions
