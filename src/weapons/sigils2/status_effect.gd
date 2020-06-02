@@ -1,21 +1,22 @@
 extends Node2D
 
+class_name StatusEffect
+# parent must be set
+# start() needs to be overriden by each status effect
+# meta_params are global parameters that every similar status effect has
+# stats are per-instance parameters
+
+
 var parent: Node
+var meta_params: Dictionary setget set_meta_params
+var stats: Dictionary setget init
 
-var required_init_params := []
-var init_params: Dictionary setget init
+func set_meta_params(params: Dictionary) -> void:
+	meta_params = params
 
-var required_stats := []
-var stats: Dictionary setget start
+func init(params: Dictionary):
+	stats = params
+	start()
 
-
-func init(params: Dictionary) -> void:
-	init_params = params
-	for required_param in required_init_params:
-		assert(required_param in init_params)
-
-func start(_stats: Dictionary):
-	stats = _stats
-	for required_stat in required_stats:
-		assert(required_stat in stats)
-
+func start():
+	pass

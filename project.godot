@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "DamageSigil",
 "language": "GDScript",
 "path": "res://src/weapons/damage.gd"
+}, {
+"base": "Node2D",
+"class": "StatusEffect",
+"language": "GDScript",
+"path": "res://src/weapons/sigils2/status_effect.gd"
 } ]
 _global_script_class_icons={
-"DamageSigil": ""
+"DamageSigil": "",
+"StatusEffect": ""
 }
 
 [application]
