@@ -4,7 +4,8 @@
 [ext_resource path="res://src/weapons/projectiles/laser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/weapons/sigils/damage.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Begin.png" type="Texture" id=4]
-[ext_resource path="res://src/weapons/trigger.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/weapons/triggers/trigger.tscn" type="PackedScene" id=5]
+
 
 [node name="Laser" type="Node2D" groups=[
 "ProjectileEmitters",

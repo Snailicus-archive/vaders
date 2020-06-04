@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "StatusEffect",
 "language": "GDScript",
-"path": "res://src/weapons/sigils2/status_effect.gd"
+"path": "res://src/weapons/status_effects/status_effect.gd"
 } ]
 _global_script_class_icons={
 "DamageSigil": "",

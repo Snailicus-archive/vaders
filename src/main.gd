@@ -12,3 +12,4 @@ func _on_emitted_projectile(p):
 
 func _on_Player_died() -> void:
 	pass # Replace with function body.
+	Timer.new()
