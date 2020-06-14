@@ -1,4 +1,4 @@
-extends "res://src/actors/actor.gd"
+extends Actor
 
 # TODO: proper testing level(with bounds and enemy zoo)
 # TODO: empower
@@ -36,7 +36,7 @@ func _ready():
 	._ready()
 	arsenal.parent = self
 	arsenal.change_weapon("Bullet")
-	
+
 func _input(event):
 	if event.is_action_pressed("slot3"):
 		arsenal.change_weapon("Laser")
@@ -66,7 +66,7 @@ func _physics_process(delta):
 func move(delta):
 	var velocity_target = get_direction() * max_speed
 
-	stats.velocity = Movement.approach(stats.velocity, 
+	stats.velocity = Movement.approach(stats.velocity,
 		velocity_target, acceleration*delta)
 
 	if stats.velocity:

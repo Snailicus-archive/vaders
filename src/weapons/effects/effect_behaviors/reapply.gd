@@ -1,4 +1,9 @@
-extends StatusEffect
+extends EffectBehavior
+
+class_name BehaviorReapply
+
+const REQ := -1
+const SCENE := preload('reapply.tscn')
 
 var current_tick = 0
 

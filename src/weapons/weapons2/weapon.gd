@@ -1,17 +1,25 @@
 extends Node2D
+class_name Weapon
 
 signal emitted_projectile(p)
 
 export(PackedScene) var PROJECTILE
+export(String) var EFFECT
+export(PackedScene) var TRIGGER
+
+
 export(float) var INTENSITY = 1
 
 var parent: Node setget set_parent
 var stats: Dictionary
-
-onready var trigger = $Trigger
+var trigger: Node
+var Effect: EffectFactory
 
 func _ready():
+	trigger = TRIGGER.instance()
+	add_child(trigger)
 	trigger.action = funcref(self, "action")
+	Effect = Spellcrafter.effects[EFFECT]
 
 func set_parent(val):
 	parent = val
@@ -20,20 +28,16 @@ func set_parent(val):
 	trigger.stats = stats
 
 func trigger():
-	print(trigger.stats)
 	trigger.trigger()
 
 func release():
 	trigger.release()
 
-
-
 func action(stats):
+	var effect = EFFECT
 	var p = PROJECTILE.instance()
-	for sigil in $Sigils.get_children():
-		p.get_node('Sigils').add_child(sigil.duplicate(7))
 
 	p.global_rotation = global_rotation
 	p.global_position = $Muzzle.global_position
-	p.init(stats)
+	p.init(stats, effect)
 	emit_signal("emitted_projectile", p)

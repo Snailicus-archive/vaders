@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 export(float) var SPEED := 1200
 export(int) var DAMAGE := 1
+# BUG #30694, should be EffectBehavior
+export(Resource) var EFFECT
 
 var velocity := Vector2()
 var stats
@@ -22,15 +24,13 @@ func init(_stats):
 func _physics_process(delta):
 	var collision := move_and_collide(velocity * delta)
 	if collision:
-		queue_free() 
+		queue_free()
 
-func apply_sigils(params: Dictionary, target: Node):
-	for sigil in $Sigils.get_children():
-		sigil.apply(params, target)
 
 func _on_Hitbox_area_entered(area: Area2D) -> void:
 	var _stats = stats.duplicate()
 	_stats['direction'] = velocity.normalized()
+	var target = area.get_parent()
+	Spellcrafter.apply_effect(target, EFFECT, _stats)
 
-	apply_sigils(_stats, area.get_parent())
 	queue_free()

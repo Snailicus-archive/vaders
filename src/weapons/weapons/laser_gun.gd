@@ -29,7 +29,7 @@ func release():
 func action(stats):
 	var _stats = stats.duplicate()
 	_stats['length'] = (get_aim_point() - $Muzzle.global_position).length()
-	
+
 	var p = PROJECTILE.instance()
 	for sigil in $Sigils.get_children():
 		p.get_node('Sigils').add_child(sigil.duplicate(7))

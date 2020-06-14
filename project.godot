@@ -9,19 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://src/actors/actor.gd"
+}, {
+"base": "EffectBehavior",
+"class": "BehaviorDamage",
+"language": "GDScript",
+"path": "res://src/weapons/effects/effect_behaviors/damage.gd"
+}, {
+"base": "EffectBehavior",
+"class": "BehaviorForce",
+"language": "GDScript",
+"path": "res://src/weapons/effects/effect_behaviors/force.gd"
+}, {
+"base": "EffectBehavior",
+"class": "BehaviorReapply",
+"language": "GDScript",
+"path": "res://src/weapons/effects/effect_behaviors/reapply.gd"
+}, {
 "base": "Resource",
 "class": "DamageSigil",
 "language": "GDScript",
-"path": "res://src/weapons/damage.gd"
+"path": "res://src/weapons/crap/damage.gd"
 }, {
 "base": "Node2D",
-"class": "StatusEffect",
+"class": "EffectBehavior",
 "language": "GDScript",
-"path": "res://src/weapons/status_effects/status_effect.gd"
+"path": "res://src/weapons/effects/effect_behavior.gd"
+}, {
+"base": "Resource",
+"class": "EffectFactory",
+"language": "GDScript",
+"path": "res://src/weapons/effects/effect_factory.gd"
+}, {
+"base": "Node2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://src/weapons/weapons2/weapon.gd"
 } ]
 _global_script_class_icons={
+"Actor": "",
+"BehaviorDamage": "",
+"BehaviorForce": "",
+"BehaviorReapply": "",
 "DamageSigil": "",
-"StatusEffect": ""
+"EffectBehavior": "",
+"EffectFactory": "",
+"Weapon": ""
 }
 
 [application]

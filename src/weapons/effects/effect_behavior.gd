@@ -1,11 +1,10 @@
 extends Node2D
 
-class_name StatusEffect
+class_name EffectBehavior
 # parent must be set
 # start() needs to be overriden by each status effect
 # meta_params are global parameters that every similar status effect has
 # stats are per-instance parameters
-
 
 var parent: Node
 var meta_params: Dictionary setget set_meta_params

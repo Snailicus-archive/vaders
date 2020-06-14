@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/weapons/weapons2/weapon.gd" type="Script" id=1]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Muzzle" type="Position2D" parent="."]

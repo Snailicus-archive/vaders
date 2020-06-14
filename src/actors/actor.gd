@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Actor
+
 signal died
 
 export(int, 1, 300) var MAX_HP := 3

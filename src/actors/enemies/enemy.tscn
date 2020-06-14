@@ -7,10 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 29.9703
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32.3025, 33.5669 )
-
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=2]
 script/source = "tool
 extends CollisionPolygon2D
 
@@ -19,14 +16,17 @@ func _process(_delta):
 		polygon[2] = polygon[1] * Vector2(1, -1)
 "
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 2016.72
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=4]
 radius = 100.717
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=5]
 radius = 375.158
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32.3025, 33.5669 )
 
 [node name="Enemy" groups=[
 "Enemies",
@@ -38,17 +38,11 @@ turn_speed = 4.0
 max_speed = 600.0
 acceleration = 600.0
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="2"]
 shape = SubResource( 1 )
-
-[node name="Hurtbox" parent="." index="2"]
-collision_layer = 16
-
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 2 )
 
 [node name="Detection" type="Area2D" parent="." index="3"]
 visible = false
@@ -58,7 +52,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Detection" index="0"]
 visible = false
 polygon = PoolVector2Array( 0, 0, 723.676, -196.82, 723.676, 196.82 )
-script = SubResource( 3 )
+script = SubResource( 2 )
 
 [node name="Chase" type="Area2D" parent="." index="4"]
 visible = false
@@ -68,7 +62,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chase" index="0"]
 position = Vector2( 0, 1.36038 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Repulsion" type="Area2D" parent="." index="5"]
 visible = false
@@ -79,7 +73,7 @@ collision_mask = 5
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Repulsion" index="0"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Attraction" type="Area2D" parent="." index="6"]
 visible = false
@@ -90,6 +84,12 @@ collision_mask = 4
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Attraction" index="0"]
 visible = false
+shape = SubResource( 5 )
+
+[node name="Hurtbox" parent="." index="7"]
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 6 )
 [connection signal="body_entered" from="Detection" to="." method="_on_Detection_body_entered"]
 [connection signal="body_exited" from="Chase" to="." method="_on_Chase_body_exited"]

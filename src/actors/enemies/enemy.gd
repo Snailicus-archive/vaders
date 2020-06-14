@@ -1,4 +1,4 @@
-extends "res://src/actors/actor.gd"
+extends Actor
 
 export(float) var turn_speed = 10
 export(float) var max_speed = 400
