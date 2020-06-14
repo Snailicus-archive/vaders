@@ -16,6 +16,7 @@ extends Actor
 # TODO: replace sigils with flags in stats
 # TODO: put everything in stats.
 
+# REFACTOR: use RemoteTransform2D for the weapons' rig
 # REFACTOR: animations with animation tree
 # REFACTOR: add stats to weapons and etc functions
 # TODO: aggro for enemies, so they wont stand still when you hit them
