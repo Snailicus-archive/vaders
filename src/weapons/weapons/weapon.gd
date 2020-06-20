@@ -15,11 +15,11 @@ var stats: Dictionary
 var trigger: Node
 var Effect: EffectFactory
 
+
 func _ready():
 	trigger = TRIGGER.instance()
 	add_child(trigger)
 	trigger.action = funcref(self, "action")
-	Effect = Spellcrafter.effects[EFFECT]
 
 func set_parent(val):
 	parent = val
@@ -39,5 +39,6 @@ func action(stats):
 
 	p.global_rotation = global_rotation
 	p.global_position = $Muzzle.global_position
-	p.init(stats, effect)
+	p.EFFECT = Spellcrafter.effects[effect]
+	p.init(stats)
 	emit_signal("emitted_projectile", p)

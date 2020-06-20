@@ -36,22 +36,17 @@ onready var camera := $CameraPivot/Offset/Camera
 func _ready():
 	._ready()
 	arsenal.parent = self
-	arsenal.change_weapon("Bullet")
 
 func _input(event):
-	if event.is_action_pressed("slot3"):
-		arsenal.change_weapon("Laser")
+	if event.is_action_pressed("next_weapon"):
+		arsenal.next_weapon()
+	if event.is_action_pressed("prev_weapon"):
+		arsenal.prev_weapon()
 
 	if event.is_action_pressed("attack"):
 		arsenal.trigger()
 	elif event.is_action_released("attack"):
 		arsenal.release()
-
-	if event.is_action_pressed("slot2"):
-		arsenal.change_weapon("Cone")
-
-	if event.is_action_pressed("slot1"):
-		arsenal.change_weapon("Bullet")
 
 func _physics_process(delta):
 	# turning

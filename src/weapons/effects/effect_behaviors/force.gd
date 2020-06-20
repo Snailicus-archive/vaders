@@ -1,11 +1,6 @@
 extends EffectBehavior
 
-class_name BehaviorForce
-
-const REQ := 1
-const SCENE := preload('force.tscn')
-
-export(int) var FORCE = 100
+export(int) var FORCE = 1000
 
 func start():
-	parent.take_force(FORCE)
+	target.take_force(FORCE * stats['direction'])

@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/weapons/weapons/bullet_gun.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/weapons/projectiles/laser.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/weapons/weapons/cone_gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/weapons/arsenal.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -16,11 +14,8 @@ COOLDOWN = 0.1
 
 [node name="Weapons" type="Node2D" parent="."]
 
-[node name="Bullet" parent="Weapons" instance=ExtResource( 1 )]
-
-[node name="Cone" parent="Weapons" instance=ExtResource( 3 )]
-
-[node name="Laser" parent="Weapons" instance=ExtResource( 2 )]
+[node name="BulletGun" parent="Weapons" instance=ExtResource( 1 )]
+EFFECT = "Fire"
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5

@@ -1,10 +1,7 @@
 extends EffectBehavior
 
-class_name BehaviorDamage
-
-const REQ := 1
-const SCENE := preload('damage.tscn')
+export(float) var DAMAGE = 1.0
 
 func start():
-	parent.take_damage(meta_params['damage'] * stats['intensity'])
+	target.take_damage(DAMAGE * stats['intensity'])
 	queue_free()

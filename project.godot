@@ -14,21 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actors/actor.gd"
 }, {
-"base": "EffectBehavior",
-"class": "BehaviorDamage",
-"language": "GDScript",
-"path": "res://src/weapons/effects/effect_behaviors/damage.gd"
-}, {
-"base": "EffectBehavior",
-"class": "BehaviorForce",
-"language": "GDScript",
-"path": "res://src/weapons/effects/effect_behaviors/force.gd"
-}, {
-"base": "EffectBehavior",
-"class": "BehaviorReapply",
-"language": "GDScript",
-"path": "res://src/weapons/effects/effect_behaviors/reapply.gd"
-}, {
 "base": "Resource",
 "class": "DamageSigil",
 "language": "GDScript",
@@ -44,19 +29,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/weapons/effects/effect_factory.gd"
 }, {
+"base": "Reference",
+"class": "EffectsIndex",
+"language": "GDScript",
+"path": "res://src/weapons/effects/effect_index.gd"
+}, {
 "base": "Node2D",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://src/weapons/weapons2/weapon.gd"
+"path": "res://src/weapons/weapons/weapon.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
-"BehaviorDamage": "",
-"BehaviorForce": "",
-"BehaviorReapply": "",
 "DamageSigil": "",
 "EffectBehavior": "",
 "EffectFactory": "",
+"EffectsIndex": "",
 "Weapon": ""
 }
 
@@ -139,6 +127,16 @@ slot2={
 slot3={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
+ ]
+}
+next_weapon={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+prev_weapon={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

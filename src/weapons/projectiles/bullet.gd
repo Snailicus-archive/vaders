@@ -26,7 +26,6 @@ func _physics_process(delta):
 	if collision:
 		queue_free()
 
-
 func _on_Hitbox_area_entered(area: Area2D) -> void:
 	var _stats = stats.duplicate()
 	_stats['direction'] = velocity.normalized()
