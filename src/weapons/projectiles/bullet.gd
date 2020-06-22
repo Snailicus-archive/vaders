@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export(float) var SPEED := 1200
 export(int) var DAMAGE := 1
-# BUG #30694, should be EffectBehavior
+# BUG #30694, should be BaseEffect
 export(Resource) var EFFECT
 
 var velocity := Vector2()

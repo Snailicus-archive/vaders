@@ -9,7 +9,8 @@ class_name EffectsIndex
 
 # name -> [input_effects, base_scene]
 const INDEX := {
-	'Damage': [0, preload("effect_behaviors/damage.tscn")],
-	'Force': [0, preload("effect_behaviors/force.tscn")],
-	'Reapply': [1, preload("effect_behaviors/reapply.tscn")],
+	'Damage': [0, preload("base_effects/damage.tscn")],
+	'Force': [0, preload("base_effects/force.tscn")],
+	'Reapply': [1, preload("base_effects/reapply.tscn")],
+	'Composite': [2, preload("base_effects/composite.tscn")]
 }

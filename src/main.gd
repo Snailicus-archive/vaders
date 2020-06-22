@@ -7,6 +7,7 @@ func _ready():
 	Spellcrafter.add_effect('Damage', 'Damage', [])
 	Spellcrafter.add_effect('ForceMe', 'Force', [])
 	Spellcrafter.add_effect('Fire', 'Reapply', ['Damage'])
+	Spellcrafter.add_effect('Explosion', 'Composite', ['Damage', 'ForceMe'])
 
 	for weapon in get_tree().get_nodes_in_group("ProjectileEmitters"):
 		weapon.connect("emitted_projectile", self, "_on_emitted_projectile")

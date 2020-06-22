@@ -14,20 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actors/actor.gd"
 }, {
-"base": "Resource",
-"class": "DamageSigil",
-"language": "GDScript",
-"path": "res://src/weapons/crap/damage.gd"
-}, {
 "base": "Node2D",
-"class": "EffectBehavior",
+"class": "BaseEffect",
 "language": "GDScript",
-"path": "res://src/weapons/effects/effect_behavior.gd"
+"path": "res://src/weapons/effects/base_effect.gd"
 }, {
 "base": "Resource",
-"class": "EffectFactory",
+"class": "Effect",
 "language": "GDScript",
-"path": "res://src/weapons/effects/effect_factory.gd"
+"path": "res://src/weapons/effects/effect.gd"
 }, {
 "base": "Reference",
 "class": "EffectsIndex",
@@ -41,9 +36,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "",
-"DamageSigil": "",
-"EffectBehavior": "",
-"EffectFactory": "",
+"BaseEffect": "",
+"Effect": "",
 "EffectsIndex": "",
 "Weapon": ""
 }

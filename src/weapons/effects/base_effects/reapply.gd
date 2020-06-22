@@ -1,4 +1,4 @@
-extends EffectBehavior
+extends BaseEffect
 
 export(int) var AMOUNT = 3
 export(float) var WAIT_TIME = 1

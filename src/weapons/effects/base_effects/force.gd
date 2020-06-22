@@ -1,4 +1,4 @@
-extends EffectBehavior
+extends BaseEffect
 
 export(int) var FORCE = 1000
 

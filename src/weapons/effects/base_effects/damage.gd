@@ -1,4 +1,4 @@
-extends EffectBehavior
+extends BaseEffect
 
 export(float) var DAMAGE = 1.0
 

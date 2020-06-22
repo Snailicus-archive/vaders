@@ -1,14 +1,14 @@
 extends Node
 
 const BASE_EFFECTS := EffectsIndex.INDEX
-var effects := {} # name -> EffectFactory
+var effects := {} # name -> Effect
 
 func add_effect(name: String, base_name: String, _effects: Array) -> void:
 	if not base_name in BASE_EFFECTS:
 		push_error("base_effect not found: %s" % base_name)
-	var new_effect = EffectFactory.new()
+	var new_effect = Effect.new()
 	new_effect.NAME = name
-	new_effect.EFFECT_BEHAVIOR = BASE_EFFECTS[base_name][1]
+	new_effect.BASE_EFFECT = BASE_EFFECTS[base_name][1]
 
 	new_effect.EFFECTS = []
 	for eff in _effects:
@@ -17,8 +17,8 @@ func add_effect(name: String, base_name: String, _effects: Array) -> void:
 	effects[name] = new_effect
 	print("new effect: ", name)
 
-static func apply_effect(target: Actor, effect: EffectFactory, stats: Dictionary):
-	var effect_inst = effect.instance()
+static func apply_effect(target: Actor, effect: Effect, stats: Dictionary):
+	var effect_inst = effect.create()
 	effect_inst.target = target
 	target.add_status_effect(effect_inst)
 	effect_inst.init(stats)
@@ -28,12 +28,12 @@ static func apply_effect(target: Actor, effect: EffectFactory, stats: Dictionary
 #			new_effect)
 
 #func set_effects(val) -> void:
-#	if EFFECT_BEHAVIOR.REQ == NAN:
+#	if BASE_EFFECT.REQ == NAN:
 #		pass
-#	elif EFFECT_BEHAVIOR.REQ < 0:
-#		if not len(EFFECTS) >= abs(EFFECT_BEHAVIOR.REQ):
+#	elif BASE_EFFECT.REQ < 0:
+#		if not len(EFFECTS) >= abs(BASE_EFFECT.REQ):
 #			push_error("DIFFERENTLY WRONG")
-#	elif EFFECT_BEHAVIOR.REQ >= 0:
-#		if len(EFFECTS) != EFFECT_BEHAVIOR.REQ:
+#	elif BASE_EFFECT.REQ >= 0:
+#		if len(EFFECTS) != BASE_EFFECT.REQ:
 #			push_error("WRONG!")
 #	EFFECTS = val

@@ -15,7 +15,7 @@ COOLDOWN = 0.1
 [node name="Weapons" type="Node2D" parent="."]
 
 [node name="BulletGun" parent="Weapons" instance=ExtResource( 1 )]
-EFFECT = "Fire"
+EFFECT = "Explosion"
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5

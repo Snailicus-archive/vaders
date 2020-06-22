@@ -12,33 +12,31 @@ export(float) var INTENSITY = 1
 
 var parent: Node setget set_parent
 var stats: Dictionary
-var trigger: Node
-var Effect: EffectFactory
-
+var trigger_node: Node
 
 func _ready():
-	trigger = TRIGGER.instance()
-	add_child(trigger)
-	trigger.action = funcref(self, "action")
+	trigger_node = TRIGGER.instance()
+	add_child(trigger_node)
+	trigger_node.action = funcref(self, "action")
 
 func set_parent(val):
 	parent = val
 	stats = parent.stats.duplicate()
 	stats['intensity'] = INTENSITY
-	trigger.stats = stats
+	trigger_node.stats = stats
 
 func trigger():
-	trigger.trigger()
+	trigger_node.trigger()
 
 func release():
-	trigger.release()
+	trigger_node.release()
 
-func action(stats):
+func action(_stats):
 	var effect = EFFECT
 	var p = PROJECTILE.instance()
 
 	p.global_rotation = global_rotation
 	p.global_position = $Muzzle.global_position
 	p.EFFECT = Spellcrafter.effects[effect]
-	p.init(stats)
+	p.init(_stats)
 	emit_signal("emitted_projectile", p)
