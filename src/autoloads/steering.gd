@@ -1,4 +1,4 @@
-extends Node
+class_name Steering
 
 static func approach(from:Vector2, to:Vector2, by:float) -> Vector2:
 	var delta = to - from
@@ -7,7 +7,7 @@ static func approach(from:Vector2, to:Vector2, by:float) -> Vector2:
 	else:
 		return from + delta.normalized() * by
 
-static func approach2(from:float, to:float, by:float) -> float:
+static func approach_float(from:float, to:float, by:float) -> float:
 	var delta = to - from
 	if abs(delta) <= by:
 		return to

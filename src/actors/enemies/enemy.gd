@@ -15,15 +15,15 @@ func move(delta):
 	var my_dir = Vector2.RIGHT.rotated(rotation)
 	if target:
 		var target_dir = (target.global_position - global_position).normalized()
-		rotation = Movement.turn_to(my_dir, target_dir, turn_speed * delta).angle()
+		rotation = Steering.turn_to(my_dir, target_dir, turn_speed * delta).angle()
 	if repulsion_force and not (target and target.position.distance_to(position) < 300):
-		stats.velocity = Movement.approach(stats.velocity, repulsion_force * max_speed, acceleration * delta)
+		stats.velocity = Steering.approach(stats.velocity, repulsion_force * max_speed, acceleration * delta)
 	else:
 		if target:
 			var velocity_target = Vector2.RIGHT.rotated(rotation) * max_speed
-			stats.velocity = Movement.approach(stats.velocity, velocity_target, acceleration * delta)
+			stats.velocity = Steering.approach(stats.velocity, velocity_target, acceleration * delta)
 		else:
-			stats.velocity = Movement.approach(stats.velocity, Vector2.ZERO, acceleration * delta)
+			stats.velocity = Steering.approach(stats.velocity, Vector2.ZERO, acceleration * delta)
 
 	var collision = move_and_collide(stats.velocity * delta)
 	if collision:

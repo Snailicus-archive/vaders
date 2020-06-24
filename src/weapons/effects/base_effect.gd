@@ -4,7 +4,10 @@ class_name BaseEffect
 # The base of an effect - encapsulates the actual behavior of the effect.
 # It is meant to be parameterized by an Effect object with proper settings.
 # Contains all logic related to the inner workings of the effect on the actor.
-
+enum req_flags {
+	momentum = 1 << 0,
+};
+export(req_flags, FLAGS) var REQUIREMENTS = 0
 
 var target: Node
 var child_effects: Array setget set_child_effects

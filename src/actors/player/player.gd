@@ -40,7 +40,7 @@ func _physics_process(delta):
 func move(delta):
 	var velocity_target = get_direction() * max_speed
 
-	stats.velocity = Movement.approach(stats.velocity,
+	stats.velocity = Steering.approach(stats.velocity,
 		velocity_target, acceleration*delta)
 
 	if stats.velocity:

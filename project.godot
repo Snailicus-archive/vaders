@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/weapons/effects/effect_index.gd"
 }, {
+"base": "Reference",
+"class": "Steering",
+"language": "GDScript",
+"path": "res://src/autoloads/steering.gd"
+}, {
 "base": "Node2D",
 "class": "Weapon",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "BaseEffect": "",
 "Effect": "",
 "EffectsIndex": "",
+"Steering": "",
 "Weapon": ""
 }
 
@@ -54,7 +60,6 @@ default_bus_layout=""
 
 [autoload]
 
-Movement="*res://src/autoloads/movement.gd"
 DebugInfo="*res://src/autoloads/debug_info.tscn"
 Spellcrafter="*res://src/autoloads/spellcraft.gd"
 
