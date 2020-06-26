@@ -1,5 +1,13 @@
 class_name Steering
 
+
+
+static func average(vecs: Array) -> Vector2:
+	var avg := Vector2.ZERO
+	for vec in vecs:
+		avg += vec
+	return avg / len(vecs)
+
 static func approach(from:Vector2, to:Vector2, by:float) -> Vector2:
 	var delta = to - from
 	if delta.length() <= by:
@@ -20,3 +28,4 @@ static func turn_to(from:Vector2, to:Vector2, by:float) -> Vector2:
 		return to
 	else:
 		return from.rotated(sign(delta) * by)
+
